@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Alumni{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <span class="eyebrow">04 / ALUMNI</span>
+    <h1>Every Batch, Remembered</h1>
+    <p class="lede">
+      A record of each batch that has passed through the sub unit, one photograph at a time.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    {% for b in alumni %}
+    <div class="alumni-block reveal">
+      <div class="photo-slot">{{ b.photo_note }}</div>
+      <div>
+        <span class="al-batch">BATCH {{ b.batch }}</span>
+        <h2 style="font-size:1.3rem;">{{ b.title }}</h2>
+        <p>{{ b.description }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "[CADET NAME]",
+    "batch": "2023 - 2025",
+    "achievement": "Cleared NDA Written Examination and SSB Interview, recommended for Indian Naval Academy",
+    "category": "Armed Forces Entry",
+    "photo": "static/images/achievers/placeholder_01.jpg",
+    "photo_note": "[PHOTO: Achiever portrait, 300x300px]"
+  },
+  {
+    "name": "[CADET NAME]",
+    "batch": "2022 - 2024",
+    "achievement": "Selected for the Republic Day Camp (RDC) Naval contingent, New Delhi",
+    "category": "National Camp",
+    "photo": "static/images/achievers/placeholder_02.jpg",
+    "photo_note": "[PHOTO: Achiever portrait, 300x300px]"
+  },
+  {
+    "name": "[CADET NAME]",
+    "batch": "2023 - 2025",
+    "achievement": "Represented the Directorate at the Thal Sainik Camp (TSC)",
+    "category": "National Camp",
+    "photo": "static/images/achievers/placeholder_03.jpg",
+    "photo_note": "[PHOTO: Achiever portrait, 300x300px]"
+  },
+  {
+    "name": "[CADET NAME]",
+    "batch": "2021 - 2023",
+    "achievement": "Joined the Indian Navy through the NCC Special Entry Scheme",
+    "category": "Armed Forces Entry",
+    "photo": "static/images/achievers/placeholder_04.jpg",
+    "photo_note": "[PHOTO: Achiever portrait, 300x300px]"
+  },
+  {
+    "name": "[CADET NAME]",
+    "batch": "2022 - 2024",
+    "achievement": "Best Cadet, Combined Annual Training Camp (CATC), Kar Goa Directorate",
+    "category": "Camp Award",
+    "photo": "static/images/achievers/placeholder_05.jpg",
+    "photo_note": "[PHOTO: Achiever portrait, 300x300px]"
+  },
+  {
+    "name": "[CADET NAME]",
+    "batch": "2023 - 2025",
+    "achievement": "Cleared the B Certificate examination with an A grade",
+    "category": "Certification",
+    "photo": "static/images/achievers/placeholder_06.jpg",
+    "photo_note": "[PHOTO: Achiever portrait, 300x300px]"
+  }
+]

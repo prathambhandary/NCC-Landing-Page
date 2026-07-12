@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Achievers{% endblock %}
+
+{% block content %}
+
+<section class="page-banner">
+  <div class="container">
+    <span class="eyebrow">03 / ACHIEVERS</span>
+    <h1>Cadets Who Made the Cut</h1>
+    <p class="lede">
+      NDA selections, national camp representations and certification honours earned by
+      cadets of the sub unit.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="card-grid">
+      {% for a in achievers %}
+      <div class="achiever-card reveal">
+        <div class="photo-slot">{{ a.photo_note }}</div>
+        <div class="ac-body">
+          <span class="ac-category">{{ a.category }}</span>
+          <h3>{{ a.name }}</h3>
+          <span class="ac-batch">Batch {{ a.batch }}</span>
+          <p>{{ a.achievement }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="note-box" style="margin-top: 40px;">
+      This list is updated as results and camp selections are announced. If your achievement
+      is missing, please report it to the unit office so it can be added.
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-emblems">
+      <div class="emblem-slot"><div class="photo-slot"><img src="{{ url_for('static', filename='images/branding/ncclogo.png') }}" alt="NCC LOGO"></div></div>
+      <div class="emblem-slot"><div class="photo-slot">[INDIAN<br>FLAG<br>ASSET<br>120x120]</div></div>
+      <div class="emblem-slot"><div class="photo-slot">[INDIAN<br>NAVY<br>CREST<br>120x120]</div></div>
+    </div>
+    <div class="hero-titles">
+      <span class="eyebrow">NATIONAL CADET CORPS &mdash; NAVAL WING</span>
+      <h1>
+        Manipal Jnanasudha
+        <span class="sub">NCC Naval Sub Unit</span>
+      </h1>
+      <p class="directorate">{{ parent_unit }} &nbsp;&middot;&nbsp; {{ directorate }}</p>
+    </div>
+    <p class="hero-lede">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. The Naval Sub Unit at Manipal
+      Jnanasudha trains cadets of Class XI and XII for the NCC &lsquo;B&rsquo; Certificate
+      examination, building discipline, seamanship and leadership alongside academics.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">{{ cadet_strength }}+</div>
+        <div class="label">Cadets on Roll</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">XI &ndash; XII</div>
+        <div class="label">Class Eligibility</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">1</div>
+        <div class="label">CTO / ANO</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">B Cert</div>
+        <div class="label">Certification Track</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quicknav">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Find your way</span>
+        <h2>Unit Information</h2>
+      </div>
+    </div>
+    <div class="quicknav-grid">
+      <a class="quicknav-card reveal" href="{{ url_for('about_ncc') }}">
+        <span class="qn-index">01 / REGARDING NCC</span>
+        <h3>History, Ethos &amp; the NCC Song</h3>
+        <p>The story of the Corps, what an ideal cadet looks like, and the songs that carry its spirit.</p>
+      </a>
+      <a class="quicknav-card reveal" href="{{ url_for('opportunities') }}">
+        <span class="qn-index">02 / OPPORTUNITIES</span>
+        <h3>NDA, Agniveer &amp; Special Entries</h3>
+        <p>Everything the &lsquo;B&rsquo; Certificate unlocks &mdash; from SSB rounds to degree admissions.</p>
+      </a>
+      <a class="quicknav-card reveal" href="{{ url_for('achievers') }}">
+        <span class="qn-index">03 / ACHIEVERS</span>
+        <h3>Cadets Who Made the Cut</h3>
+        <p>NDA selections, national camps and the cadets carrying the sub unit&rsquo;s name forward.</p>
+      </a>
+      <a class="quicknav-card reveal" href="{{ url_for('alumni') }}">
+        <span class="qn-index">04 / ALUMNI</span>
+        <h3>Every Batch, Remembered</h3>
+        <p>Group photographs and notes from each passing-out batch of the sub unit.</p>
+      </a>
+      <a class="quicknav-card reveal" href="{{ url_for('gallery') }}">
+        <span class="qn-index">05 / GALLERY</span>
+        <h3>Camps, Drills &amp; Community Service</h3>
+        <p>The full photographic record &mdash; filterable by year, month and activity.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-paper-dim">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Unit Signal Log</span>
+        <h2>Latest News</h2>
+      </div>
+      <span class="log-date">UPDATED {{ news[0].date if news else '—' }}</span>
+    </div>
+    <div class="news-list">
+      {% for item in news %}
+      <div class="news-item reveal">
+        <span class="log-date">{{ item.date }}</span>
+        <div>
+          <h3 class="news-title">{{ item.title }}</h3>
+          <p class="summary">{{ item.summary }}</p>
+        </div>
+        <span class="news-tag">{{ item.tag }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-navy">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Chain of Command</span>
+        <h2>Officers of the Unit</h2>
+      </div>
+    </div>
+    <div class="officers-grid">
+      {% for o in officers %}
+      <div class="officer-card reveal">
+        <div class="photo-slot">{{ o.photo_note }}</div>
+        <div class="o-name">{{ o.name }}</div>
+        <div class="o-role">{{ o.designation }}</div>
+        <p class="o-unit">{{ o.unit }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
