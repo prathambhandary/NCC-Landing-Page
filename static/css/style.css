@@ -1,13 +1,14 @@
 /* ==========================================================================
    MANIPAL JNANASUDHA NCC NAVAL SUB UNIT
-   Design tokens: Navy, Sky, Red, Gold — the colours of the NCC flag.
-   Display face: Oswald (parade-board, condensed, disciplined)
-   Body face:    Source Serif 4 (despatch / ledger register feel)
-   Utility face: JetBrains Mono (log entries, dates, coordinates)
-   Signature:    the "signal flag" stripe + the ship's-log date stamp
+   Design based on user's original aesthetics + NCC colors.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Lexend:wght@100..900&family=Special+Gothic+Condensed+One&display=swap');
+
+@font-face {
+  font-family: 'Swiss 921 Regular';
+  src: url('Swiss 921 Regular.otf') format('opentype');
+}
 
 :root {
   --navy-deep:  #061A33;
@@ -25,9 +26,9 @@
   --ink-soft:   #3C4E5C;
   --white:      #FFFFFF;
 
-  --font-display: 'Oswald', 'Arial Narrow', sans-serif;
-  --font-body: 'Source Serif 4', Georgia, serif;
-  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-display: 'Swiss 921 Regular', 'Arial Narrow', sans-serif;
+  --font-body: 'Lexend', sans-serif;
+  --font-mono: 'Courier New', monospace;
 
   --max-width: 1180px;
   --radius: 2px;
@@ -47,7 +48,6 @@ body {
 }
 
 img { max-width: 100%; display: block; }
-
 a { color: inherit; text-decoration: none; }
 
 h1, h2, h3, h4 {
@@ -57,7 +57,6 @@ h1, h2, h3, h4 {
   color: var(--navy-deep);
   margin: 0 0 0.5em;
 }
-
 p { margin: 0 0 1em; }
 
 .container {
@@ -66,26 +65,9 @@ p { margin: 0 0 1em; }
   padding: 0 24px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 2px;
-}
-
-/* --------------------------------------------------------------------------
-   SIGNATURE ELEMENT — the signal-flag stripe.
-   A thin four-colour band (order: Gold / Red / Navy / Sky) that opens every
-   page like a masthead and reappears as a section divider throughout the
-   site. It stands in for the NCC flag without reproducing it literally.
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   SIGNAL STRIPE (NCC flag colours)
+   ========================================================================== */
 .signal-stripe {
   height: 6px;
   width: 100%;
@@ -122,186 +104,160 @@ p { margin: 0 0 1em; }
 .signal-divider .flags span:nth-child(2) { background: var(--red); }
 .signal-divider .flags span:nth-child(3) { background: var(--sky); }
 
-/* --------------------------------------------------------------------------
-   Ship's-log date stamp — used anywhere a date needs to read like an
-   official entry: [ 12 JUL 2026 ]
-   -------------------------------------------------------------------------- */
-.log-date {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  color: var(--navy);
-  background: var(--paper-dim);
-  border: 1px solid rgba(11, 42, 78, 0.18);
-  padding: 3px 9px;
-  border-radius: var(--radius);
-  display: inline-block;
+/* ==========================================================================
+   TOP BAR – EXACT USER LOGO BAR
+   ========================================================================== */
+.top-bar {
+  background: #ffffff;
+  border-bottom: 2px solid #eef2f7;
 }
-
-/* --------------------------------------------------------------------------
-   Placeholder photo box — clearly marked spots for real assets
-   -------------------------------------------------------------------------- */
-.photo-slot {
-  position: relative;
+.top-bar .logos {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 10px 20px;
+}
+.top-bar .ncclogo {
+  width: 140px;
+  height: 190px;
+  background-image: url('../images/branding/ncc_logo.png');
+  background-size: cover;
+  background-position: center;
+}
+.top-bar .jnslogo {
+  width: 55px;
+  height: 55px;
+  background-image: url('../images/branding/jns_logo.png');
+  background-size: cover;
+  background-position: center;
+}
+.top-bar .navylogo {
+  width: 160px;
+  height: 160px;
+  background-image: url('../images/branding/navy_logo.png');
+  background-size: cover;
+  background-position: center;
+}
+.top-bar .jnslogodiv {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  background:
-    repeating-linear-gradient(45deg, rgba(11,42,78,0.05), rgba(11,42,78,0.05) 10px, rgba(11,42,78,0.02) 10px, rgba(11,42,78,0.02) 20px);
-  border: 1.5px dashed rgba(11, 42, 78, 0.45);
-  color: var(--navy);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.02em;
-  line-height: 1.5;
-  padding: 14px;
-  min-height: 100%;
-  width: 100%;
-}
-.photo-slot::before {
-  content: '';
-  position: absolute;
-  top: 8px; left: 8px; right: 8px; bottom: 8px;
-  border: 1px solid rgba(11, 42, 78, 0.2);
-  pointer-events: none;
+  font-family: 'Swiss 921 Regular', sans-serif;
+  font-size: 50px;
+  color: #2E3092;
+  gap: 10px;
 }
 
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */
-.site-header {
-  background: var(--navy-deep);
+.navbar {
+  background: #2E3092;
   position: sticky;
   top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 14px rgba(0,0,0,0.25);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
-.nav-bar {
+.navbar .container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 14px 24px;
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
-.nav-top {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--white);
-  min-width: 0; /* allow flex children to shrink instead of overflowing */
-  flex: 1 1 auto;
-}
-.nav-brand .crest-mini {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(255,255,255,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 0.5rem;
-  text-align: center;
-  color: rgba(255,255,255,0.75);
-  flex-shrink: 0;
-  background: rgba(255,255,255,0.04);
-}
-.nav-brand .brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-  min-width: 0;
-}
-.nav-brand .brand-text .primary {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.nav-brand .brand-text .secondary {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--gold-light);
-  letter-spacing: 0.05em;
-  margin-top: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  min-height: 64px;
 }
 .nav-links {
   display: flex;
-  gap: 4px;
+  list-style: none;
+  gap: 8px;
   align-items: center;
-  flex-wrap: wrap;
 }
 .nav-links a {
-  color: rgba(255,255,255,0.82);
-  font-family: var(--font-display);
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 8px 12px;
-  border-radius: var(--radius);
-  transition: background 0.2s ease, color 0.2s ease;
-  white-space: nowrap;
+  color: rgba(255,255,255,0.85);
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+  position: relative;
+  text-decoration: none;
+}
+.nav-links a::before,
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  transition: width 0.3s ease;
+}
+.nav-links a::before {
+  top: 2px;
+  background: #EE1C24;
+}
+.nav-links a::after {
+  bottom: 2px;
+  background: #00AEEF;
+}
+.nav-links a:hover::before,
+.nav-links a:hover::after,
+.nav-links a.active::before,
+.nav-links a.active::after {
+  width: 60%;
 }
 .nav-links a:hover,
 .nav-links a.active {
-  background: rgba(255,255,255,0.08);
-  color: var(--gold-light);
-}
-.nav-toggle {
-  display: none;
-  background: none;
-  border: 1px solid rgba(255,255,255,0.4);
-  color: var(--white);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  padding: 6px 10px;
-  cursor: pointer;
+  color: #ffffff;
+  background: rgba(255,255,255,0.12);
 }
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #ffffff;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
 @media (max-width: 900px) {
-  .nav-toggle { display: block; flex-shrink: 0; }
-  .nav-top { width: 100%; }
+  .hamburger { display: flex; }
   .nav-links {
     display: none;
     flex-direction: column;
-    align-items: stretch;
     width: 100%;
-    background: var(--navy-deep);
-    padding: 10px 0 4px;
+    background: #2E3092;
+    padding: 10px 0;
   }
   .nav-links.open { display: flex; }
-  .nav-links a { padding: 12px 8px; }
-  .nav-bar { padding: 12px 16px; gap: 10px; }
+  .navbar .container { flex-wrap: wrap; }
 }
 
 /* ==========================================================================
-   HERO / MASTHEAD (index page)
+   HERO (index)
    ========================================================================== */
 .hero {
-  position: relative;
-  background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
+  background: linear-gradient(135deg, #1a1a4e 0%, #2E3092 50% 100%);
   color: var(--white);
-  overflow: hidden;
   padding: 64px 0 80px;
+  position: relative;
+  overflow: hidden;
 }
 .hero::after {
-  /* faint compass rose watermark, pure CSS/SVG-free */
   content: '';
   position: absolute;
   right: -120px;
@@ -315,7 +271,6 @@ p { margin: 0 0 1em; }
 }
 .hero-emblems {
   display: flex;
-  align-items: center;
   justify-content: center;
   gap: 28px;
   margin-bottom: 34px;
@@ -327,7 +282,11 @@ p { margin: 0 0 1em; }
   border-radius: 50%;
   flex-shrink: 0;
 }
-.emblem-slot .photo-slot { border-radius: 50%; font-size: 0.58rem; padding: 6px; }
+.emblem-slot .photo-slot {
+  border-radius: 50%;
+  font-size: 0.58rem;
+  padding: 6px;
+}
 .hero-titles { text-align: center; }
 .hero-titles .eyebrow {
   font-family: var(--font-mono);
@@ -387,7 +346,7 @@ p { margin: 0 0 1em; }
   margin-top: 2px;
 }
 
-/* Quick nav grid on the landing page */
+/* Quick nav */
 .quicknav {
   background: var(--paper);
   padding: 56px 0;
@@ -403,7 +362,7 @@ p { margin: 0 0 1em; }
   border-top: 3px solid var(--sky);
   padding: 22px 20px;
   box-shadow: var(--shadow-card);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s, border-color 0.2s;
 }
 .quicknav-card:hover { transform: translateY(-3px); border-top-color: var(--gold); }
 .quicknav-card .qn-index {
@@ -424,13 +383,12 @@ p { margin: 0 0 1em; }
 }
 
 /* ==========================================================================
-   SECTION SCAFFOLDING
+   COMMON SECTION STYLES
    ========================================================================== */
 .section { padding: 64px 0; }
-.section-tight { padding: 40px 0; }
+.section-paper-dim { background: var(--paper-dim); }
 .section-navy { background: var(--navy-deep); color: var(--white); }
 .section-navy h2, .section-navy h3 { color: var(--white); }
-.section-paper-dim { background: var(--paper-dim); }
 
 .section-head {
   display: flex;
@@ -493,13 +451,20 @@ p { margin: 0 0 1em; }
   align-self: start;
   white-space: nowrap;
 }
-@media (max-width: 700px) {
-  .news-item { grid-template-columns: 1fr; }
-  .news-tag { justify-self: start; }
+.log-date {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--navy);
+  background: var(--paper-dim);
+  border: 1px solid rgba(11,42,78,0.18);
+  padding: 3px 9px;
+  border-radius: var(--radius);
+  display: inline-block;
 }
 
 /* ==========================================================================
-   OFFICERS STRIP
+   OFFICERS
    ========================================================================== */
 .officers-grid {
   display: grid;
@@ -544,7 +509,7 @@ p { margin: 0 0 1em; }
 }
 
 /* ==========================================================================
-   CARDS / GENERIC GRID
+   CARDS / GENERIC
    ========================================================================== */
 .card-grid {
   display: grid;
@@ -571,7 +536,6 @@ p { margin: 0 0 1em; }
   margin-bottom: 12px;
 }
 
-/* Achievers */
 .achiever-card {
   background: var(--white);
   border: 1px solid rgba(11,42,78,0.12);
@@ -599,7 +563,6 @@ p { margin: 0 0 1em; }
 }
 .achiever-card p { font-size: 0.92rem; color: var(--ink-soft); margin: 0; }
 
-/* Alumni */
 .alumni-block {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
@@ -618,9 +581,6 @@ p { margin: 0 0 1em; }
   letter-spacing: 0.08em;
   margin-bottom: 8px;
   display: block;
-}
-@media (max-width: 760px) {
-  .alumni-block, .alumni-block:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
 }
 
 /* ==========================================================================
@@ -677,7 +637,7 @@ p { margin: 0 0 1em; }
   color: var(--navy);
   background: transparent;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s, color 0.2s;
 }
 .gallery-tab.active,
 .gallery-tab:hover { background: var(--navy); color: var(--white); }
@@ -708,7 +668,6 @@ p { margin: 0 0 1em; }
   gap: 14px;
 }
 .gallery-strip .photo-slot { aspect-ratio: 4 / 3; font-size: 0.65rem; }
-
 .gallery-empty {
   text-align: center;
   padding: 60px 20px;
@@ -719,7 +678,7 @@ p { margin: 0 0 1em; }
 }
 
 /* ==========================================================================
-   OPPORTUNITIES PAGE
+   OPPORTUNITIES
    ========================================================================== */
 .opp-block { margin-bottom: 52px; }
 .opp-block h2 { font-size: 1.35rem; display: flex; align-items: center; gap: 12px; }
@@ -799,11 +758,38 @@ p { margin: 0 0 1em; }
   flex-wrap: wrap;
   gap: 8px;
 }
-@media (max-width: 760px) {
-  .footer-grid { grid-template-columns: 1fr; }
+
+/* ==========================================================================
+   PHOTO SLOT
+   ========================================================================== */
+.photo-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: repeating-linear-gradient(45deg, rgba(11,42,78,0.05), rgba(11,42,78,0.05) 10px, rgba(11,42,78,0.02) 10px, rgba(11,42,78,0.02) 20px);
+  border: 1.5px dashed rgba(11,42,78,0.45);
+  color: var(--navy);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  padding: 14px;
+  min-height: 100%;
+  width: 100%;
+}
+.photo-slot::before {
+  content: '';
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px solid rgba(11,42,78,0.2);
+  pointer-events: none;
 }
 
-/* Reveal-on-scroll (subtle, respects reduced motion) */
+/* ==========================================================================
+   SCROLL REVEAL
+   ========================================================================== */
 .reveal {
   opacity: 0;
   transform: translateY(14px);
@@ -812,52 +798,37 @@ p { margin: 0 0 1em; }
 .reveal.in-view { opacity: 1; transform: translateY(0); }
 
 /* ==========================================================================
-   PHONE BREAKPOINT — most cadets and visitors will land here first.
-   Tightens spacing, shrinks the masthead, and stacks anything still
-   competing for horizontal room above 480px.
+   RESPONSIVE
    ========================================================================== */
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .news-item { grid-template-columns: 1fr; }
+  .news-tag { justify-self: start; }
+  .alumni-block, .alumni-block:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
+}
 @media (max-width: 600px) {
   .container { padding: 0 16px; }
-
   .hero { padding: 40px 0 52px; }
   .hero-emblems { gap: 14px; margin-bottom: 24px; }
   .emblem-slot { width: 64px; height: 64px; }
-  .hero-emblems .photo-slot { font-size: 0.5rem; padding: 4px; }
-  .hero-titles .eyebrow { font-size: 0.66rem; letter-spacing: 0.12em; }
-  .hero-titles h1 { font-size: clamp(1.6rem, 8vw, 2.2rem); }
-  .hero-titles .directorate { font-size: 0.76rem; }
-  .hero-lede { font-size: 0.96rem; margin-top: 20px; }
-  .hero-stats { gap: 28px; row-gap: 20px; margin-top: 30px; }
+  .hero-stats { gap: 28px; }
   .hero-stat .num { font-size: 1.5rem; }
-  .hero-stat .label { font-size: 0.6rem; }
-
   .section { padding: 44px 0; }
-  .section-tight { padding: 28px 0; }
   .page-banner { padding: 36px 0 28px; }
-
   .quicknav { padding: 40px 0; }
-  .officer-card { padding: 16px; }
   .officer-card .photo-slot { width: 96px; height: 96px; }
-
-  .news-item { padding: 16px 0; }
-  .achiever-card .photo-slot { height: 150px; }
-  .alumni-block { padding: 24px 0; gap: 18px; }
-  .alumni-block .photo-slot { height: 190px; }
-
-  .opp-block h2 { font-size: 1.12rem; flex-wrap: wrap; }
-  .opp-block th, .opp-block td { padding: 8px 10px; font-size: 0.85rem; }
-
   .gallery-toolbar { padding: 16px; gap: 16px; }
   .toolbar-field select { min-width: 130px; width: 100%; }
   .toolbar-count { margin-left: 0; }
-  .gallery-strip { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-
+  .gallery-strip { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
   .signal-divider { margin: 40px 0 24px; }
-
-  .footer-grid { gap: 26px; }
 }
-
-@media (max-width: 380px) {
-  .nav-brand .brand-text .secondary { display: none; } /* keep the bar on one line on the narrowest phones */
-  .hero-titles h1 .sub { font-size: 0.5em; }
+@media (max-width: 480px) {
+  .top-bar .logos { height: auto; padding: 10px 16px; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .top-bar .ncclogo { width: 80px; height: 110px; }
+  .top-bar .jnslogo { width: 40px; height: 40px; }
+  .top-bar .navylogo { width: 90px; height: 90px; }
+  .top-bar .jnslogodiv { font-size: 30px; gap: 6px; }
 }

@@ -3,15 +3,16 @@
 
 {% block content %}
 
+<!-- ===== HERO ===== -->
 <section class="hero">
   <div class="container">
     <div class="hero-emblems">
-      <div class="emblem-slot"><div class="photo-slot"><img src="{{ url_for('static', filename='images/branding/ncclogo.png') }}" alt="NCC LOGO"></div></div>
-      <div class="emblem-slot"><div class="photo-slot">[INDIAN<br>FLAG<br>ASSET<br>120x120]</div></div>
-      <div class="emblem-slot"><div class="photo-slot">[INDIAN<br>NAVY<br>CREST<br>120x120]</div></div>
+      <div class="emblem-slot"><div class="photo-slot">NCC<br>LOGO</div></div>
+      <div class="emblem-slot"><div class="photo-slot">INDIAN<br>FLAG</div></div>
+      <div class="emblem-slot"><div class="photo-slot">NAVY<br>CREST</div></div>
     </div>
     <div class="hero-titles">
-      <span class="eyebrow">NATIONAL CADET CORPS &mdash; NAVAL WING</span>
+      <span class="eyebrow">NATIONAL CADET CORPS — NAVAL WING</span>
       <h1>
         Manipal Jnanasudha
         <span class="sub">NCC Naval Sub Unit</span>
@@ -19,32 +20,19 @@
       <p class="directorate">{{ parent_unit }} &nbsp;&middot;&nbsp; {{ directorate }}</p>
     </div>
     <p class="hero-lede">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. The Naval Sub Unit at Manipal
-      Jnanasudha trains cadets of Class XI and XII for the NCC &lsquo;B&rsquo; Certificate
-      examination, building discipline, seamanship and leadership alongside academics.
+      The Naval Sub Unit at Manipal Jnanasudha trains cadets of Class XI and XII for the NCC &lsquo;B&rsquo; Certificate examination, building discipline, seamanship and leadership alongside academics.
     </p>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="num">{{ cadet_strength }}+</div>
-        <div class="label">Cadets on Roll</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num">XI &ndash; XII</div>
-        <div class="label">Class Eligibility</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num">1</div>
-        <div class="label">CTO / ANO</div>
-      </div>
-      <div class="hero-stat">
-        <div class="num">B Cert</div>
-        <div class="label">Certification Track</div>
-      </div>
+      <div class="hero-stat"><div class="num">{{ cadet_strength }}+</div><div class="label">Cadets on Roll</div></div>
+      <div class="hero-stat"><div class="num">XI – XII</div><div class="label">Class Eligibility</div></div>
+      <div class="hero-stat"><div class="num">1</div><div class="label">CTO / ANO</div></div>
+      <div class="hero-stat"><div class="num">B Cert</div><div class="label">Certification Track</div></div>
     </div>
   </div>
 </section>
 
-<section class="quicknav">
+<!-- ===== QUICK NAV ===== -->
+<section class="quicknav section">
   <div class="container">
     <div class="section-head">
       <div>
@@ -61,7 +49,7 @@
       <a class="quicknav-card reveal" href="{{ url_for('opportunities') }}">
         <span class="qn-index">02 / OPPORTUNITIES</span>
         <h3>NDA, Agniveer &amp; Special Entries</h3>
-        <p>Everything the &lsquo;B&rsquo; Certificate unlocks &mdash; from SSB rounds to degree admissions.</p>
+        <p>Everything the &lsquo;B&rsquo; Certificate unlocks — from SSB rounds to degree admissions.</p>
       </a>
       <a class="quicknav-card reveal" href="{{ url_for('achievers') }}">
         <span class="qn-index">03 / ACHIEVERS</span>
@@ -76,12 +64,13 @@
       <a class="quicknav-card reveal" href="{{ url_for('gallery') }}">
         <span class="qn-index">05 / GALLERY</span>
         <h3>Camps, Drills &amp; Community Service</h3>
-        <p>The full photographic record &mdash; filterable by year, month and activity.</p>
+        <p>The full photographic record — filterable by year, month and activity.</p>
       </a>
     </div>
   </div>
 </section>
 
+<!-- ===== NEWS ===== -->
 <section class="section section-paper-dim">
   <div class="container">
     <div class="section-head">
@@ -106,6 +95,7 @@
   </div>
 </section>
 
+<!-- ===== OFFICERS ===== -->
 <section class="section section-navy">
   <div class="container">
     <div class="section-head">

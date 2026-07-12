@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     toggle.addEventListener('click', function () {
       var isOpen = links.classList.toggle('open');
       toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      toggle.classList.toggle('active');
     });
   }
 

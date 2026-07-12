@@ -1,53 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% block title %}{{ unit_name }}{% endblock %} — {{ parent_unit }}</title>
-<meta name="description" content="Official website of the {{ unit_name }}, {{ parent_unit }}, {{ directorate }}.">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ unit_name }}{% endblock %} — {{ parent_unit }}</title>
+  <meta name="description" content="Official website of the {{ unit_name }}, {{ parent_unit }}, {{ directorate }}.">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Lexend:wght@100..900&family=Special+Gothic+Condensed+One&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-<div class="signal-stripe" aria-hidden="true">
-  <span class="s-gold"></span><span class="s-red"></span><span class="s-navy"></span><span class="s-sky"></span>
-</div>
+  <!-- Signal stripe (NCC colours) -->
+  <div class="signal-stripe" aria-hidden="true">
+    <span class="s-gold"></span><span class="s-red"></span><span class="s-navy"></span><span class="s-sky"></span>
+  </div>
 
-<header class="site-header">
-  <nav class="nav-bar">
-    <a href="{{ url_for('index') }}" class="nav-brand">
-      <span class="crest-mini" aria-hidden="true">NCC<br>CREST</span>
-      <span class="brand-text">
-        <span class="primary">Manipal Jnanasudha</span>
-        <span class="secondary">NCC NAVAL SUB UNIT — 6 KAR NAVAL UNIT</span>
-      </span>
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">MENU</button>
-    <div class="nav-links" id="navLinks">
-      <a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' }}">Home</a>
-      <a href="{{ url_for('about_ncc') }}" class="{{ 'active' if request.endpoint == 'about_ncc' }}">Regarding NCC</a>
-      <a href="{{ url_for('opportunities') }}" class="{{ 'active' if request.endpoint == 'opportunities' }}">Opportunities</a>
-      <a href="{{ url_for('achievers') }}" class="{{ 'active' if request.endpoint == 'achievers' }}">Achievers</a>
-      <a href="{{ url_for('alumni') }}" class="{{ 'active' if request.endpoint == 'alumni' }}">Alumni</a>
-      <a href="{{ url_for('gallery') }}" class="{{ 'active' if request.endpoint == 'gallery' }}">Gallery</a>
+  <!-- ===== TOP BAR – EXACT USER LOGO BAR ===== -->
+  <header class="top-bar">
+    <div class="logos">
+      <div class="ncclogo"></div>
+      <div class="jnslogodiv">
+        <div class="jnslogo"></div>
+        JnanaSudha
+      </div>
+      <div class="navylogo"></div>
+    </div>
+  </header>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' }}">Home</a></li>
+        <li><a href="{{ url_for('about_ncc') }}" class="{{ 'active' if request.endpoint == 'about_ncc' }}">Regarding NCC</a></li>
+        <li><a href="{{ url_for('opportunities') }}" class="{{ 'active' if request.endpoint == 'opportunities' }}">Opportunities</a></li>
+        <li><a href="{{ url_for('achievers') }}" class="{{ 'active' if request.endpoint == 'achievers' }}">Achievers</a></li>
+        <li><a href="{{ url_for('alumni') }}" class="{{ 'active' if request.endpoint == 'alumni' }}">Alumni</a></li>
+        <li><a href="{{ url_for('gallery') }}" class="{{ 'active' if request.endpoint == 'gallery' }}">Gallery</a></li>
+      </ul>
     </div>
   </nav>
-</header>
 
-<main>
-{% block content %}{% endblock %}
-</main>
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
       <div>
         <h4>{{ unit_name }}</h4>
-        <p>
-          {{ parent_unit }}, {{ directorate }}. Preparing cadets of Class XI and XII
-          for the NCC &lsquo;B&rsquo; Certificate examination through disciplined training,
-          national service and career guidance for the armed forces.
-        </p>
+        <p>{{ parent_unit }}, {{ directorate }}. Preparing cadets of Class XI and XII for the NCC &lsquo;B&rsquo; Certificate examination through disciplined training, national service and career guidance for the armed forces.</p>
       </div>
       <div>
         <h4>Navigate</h4>
@@ -69,14 +79,13 @@
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="footer-bottom container">
       <span>&copy; <span id="year"></span> {{ unit_name }}. All rights reserved.</span>
       <span>UNITY AND DISCIPLINE</span>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-{% block scripts %}{% endblock %}
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
 </body>
 </html>
