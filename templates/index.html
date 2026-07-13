@@ -6,15 +6,17 @@
 <section class="hero">
   <div class="container">
     <div class="hero-emblems">
-      <div class="emblem-slot"><div class="photo-slot">
-        <img src="{{ url_for('static', filename='images/branding/ncc_logo.png') }}" alt="NCC LOGO">
-      </div></div>
-      <div class="emblem-slot"><div class="photo-slot">
-        <img src="{{ url_for('static', filename='images/branding/india_flag.png') }}" alt="NCC LOGO">
-      </div></div>
-      <div class="emblem-slot"><div class="photo-slot">
-        <img src="{{ url_for('static', filename='images/branding/navy_logo.png') }}" alt="NCC LOGO">
-      </div></div>
+      <div class="emblem-slot" style="display: flex; justify-content: center; align-items: center;">
+        <img src="{{ url_for('static', filename='images/branding/ncc_logo.png') }}" alt="NCC Logo">
+      </div>
+
+      <div class="emblem-slot" style="display: flex; justify-content: center; align-items: center;">
+        <img src="{{ url_for('static', filename='images/branding/india_flag.png') }}" alt="Indian Flag">
+      </div>
+
+      <div class="emblem-slot" style="display: flex; justify-content: center; align-items: center;">
+        <img src="{{ url_for('static', filename='images/branding/navy_logo.png') }}" alt="Indian Navy Crest">
+      </div>
     </div>
     <div class="hero-titles">
       <span class="eyebrow">NATIONAL CADET CORPS &mdash; NAVAL WING</span>
@@ -62,27 +64,27 @@
     </div>
     <div class="quicknav-grid">
       <a class="quicknav-card reveal" href="{{ url_for('about_ncc') }}">
-        <span class="qn-index">01 / REGARDING NCC</span>
+        <span class="qn-index">REGARDING NCC</span>
         <h3>History, Ethos &amp; the NCC Song</h3>
         <p>The story of the Corps, what an ideal cadet looks like, and the songs that carry its spirit.</p>
       </a>
       <a class="quicknav-card reveal" href="{{ url_for('opportunities') }}">
-        <span class="qn-index">02 / OPPORTUNITIES</span>
+        <span class="qn-index">OPPORTUNITIES</span>
         <h3>NDA, Agniveer &amp; Special Entries</h3>
         <p>Everything the &lsquo;B&rsquo; Certificate unlocks &mdash; from SSB rounds to degree admissions.</p>
       </a>
       <a class="quicknav-card reveal" href="{{ url_for('achievers') }}">
-        <span class="qn-index">03 / ACHIEVERS</span>
+        <span class="qn-index">ACHIEVERS</span>
         <h3>Cadets Who Made the Cut</h3>
         <p>NDA selections, national camps and the cadets carrying the sub unit&rsquo;s name forward.</p>
       </a>
       <a class="quicknav-card reveal" href="{{ url_for('alumni') }}">
-        <span class="qn-index">04 / ALUMNI</span>
+        <span class="qn-index">ALUMNI</span>
         <h3>Every Batch, Remembered</h3>
         <p>Group photographs and notes from each passing-out batch of the sub unit.</p>
       </a>
       <a class="quicknav-card reveal" href="{{ url_for('gallery') }}">
-        <span class="qn-index">05 / GALLERY</span>
+        <span class="qn-index">GALLERY</span>
         <h3>Camps, Drills &amp; Community Service</h3>
         <p>The full photographic record &mdash; filterable by year, month and activity.</p>
       </a>
@@ -125,12 +127,9 @@
     <div class="officers-grid">
       {% for o in officers %}
       <div class="officer-card reveal">
-        <!-- <div class="photo-slot"><img src="{{ url_for('static', filename=o.photo) }}" alt="NCC LOGO"></div> -->
-        <img
-            style="height: 320px; width: auto; object-fit: contain; display: block; margin: 0 auto;"
-            src="{{ url_for('static', filename=o.photo) }}"
-            alt="{{ o.name }}"
-        >
+        <div class="officer-photo">
+          <img src="{{ url_for('static', filename=o.photo) }}" alt="{{ o.name }}">
+        </div>
         <div class="o-name">{{ o.name }}</div>
         <div class="o-role">{{ o.designation }}</div>
         <p class="o-unit">{{ o.unit }}</p>

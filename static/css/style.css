@@ -50,15 +50,50 @@ img { max-width: 100%; display: block; }
 
 a { color: inherit; text-decoration: none; }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--navy-deep);
   margin: 0 0 0.5em;
+  line-height: 1.25;
 }
 
+h3 { font-size: 1.1rem; }
+h4 { font-size: 0.95rem; color: var(--navy); }
+h5 {
+  font-size: 0.78rem;
+  color: var(--red-deep);
+  letter-spacing: 0.08em;
+}
+
+.section-navy h5,
+.section-navy h4 { color: inherit; }
+
 p { margin: 0 0 1em; }
+
+/* Body copy defaults for lists, quotes and inline emphasis anywhere in the
+   flowing text (used heavily by the Opportunities deep-dives) */
+ul, ol {
+  margin: 0 0 1.1em;
+  padding-left: 1.3em;
+}
+li { margin-bottom: 0.5em; line-height: 1.6; }
+li:last-child { margin-bottom: 0; }
+ul li::marker { color: var(--sky); }
+strong { color: var(--navy-deep); font-weight: 700; }
+em { color: var(--ink-soft); }
+small { font-size: 0.82em; color: var(--ink-soft); }
+
+blockquote {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border-left: 4px solid var(--red);
+  background: rgba(178,31,45,0.06);
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+}
+blockquote strong { color: var(--red-deep); }
 
 .container {
   max-width: var(--max-width);
@@ -82,9 +117,6 @@ p { margin: 0 0 1em; }
 
 /* --------------------------------------------------------------------------
    SIGNATURE ELEMENT — the signal-flag stripe.
-   A thin four-colour band (order: Gold / Red / Navy / Sky) that opens every
-   page like a masthead and reappears as a section divider throughout the
-   site. It stands in for the NCC flag without reproducing it literally.
    -------------------------------------------------------------------------- */
 .signal-stripe {
   height: 6px;
@@ -109,10 +141,7 @@ p { margin: 0 0 1em; }
   background: linear-gradient(to right, var(--ink-soft), transparent);
   opacity: 0.3;
 }
-.signal-divider .flags {
-  display: flex;
-  gap: 4px;
-}
+.signal-divider .flags { display: flex; gap: 4px; }
 .signal-divider .flags span {
   width: 10px;
   height: 14px;
@@ -122,10 +151,6 @@ p { margin: 0 0 1em; }
 .signal-divider .flags span:nth-child(2) { background: var(--red); }
 .signal-divider .flags span:nth-child(3) { background: var(--sky); }
 
-/* --------------------------------------------------------------------------
-   Ship's-log date stamp — used anywhere a date needs to read like an
-   official entry: [ 12 JUL 2026 ]
-   -------------------------------------------------------------------------- */
 .log-date {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -139,7 +164,9 @@ p { margin: 0 0 1em; }
 }
 
 /* --------------------------------------------------------------------------
-   Placeholder photo box — clearly marked spots for real assets
+   Placeholder photo box AND real-image frame — same class handles both.
+   Text placeholders get the dashed/hatched treatment; add .has-image (or
+   drop an <img> inside) and it becomes a clean image frame instead.
    -------------------------------------------------------------------------- */
 .photo-slot {
   position: relative;
@@ -158,13 +185,20 @@ p { margin: 0 0 1em; }
   padding: 14px;
   min-height: 100%;
   width: 100%;
+  overflow: hidden; /* clip any real photo to the shape of its frame */
 }
-.photo-slot::before {
-  content: '';
-  position: absolute;
-  top: 8px; left: 8px; right: 8px; bottom: 8px;
-  /* border: 1px solid rgba(11, 42, 78, 0.2); */
-  pointer-events: none;
+.photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+.photo-slot.has-image {
+  background: rgba(255,255,255,0.05);
+  border-style: solid;
+  border-color: rgba(255,255,255,0.2);
+  padding: 10px;
 }
 
 /* ==========================================================================
@@ -204,7 +238,7 @@ p { margin: 0 0 1em; }
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  /* border: 1.5px dashed rgba(255,255,255,0.5); */
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -213,7 +247,12 @@ p { margin: 0 0 1em; }
   text-align: center;
   color: rgba(255,255,255,0.75);
   flex-shrink: 0;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.06);
+}
+.nav-brand .crest-mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .nav-brand .brand-text {
   display: flex;
@@ -320,6 +359,7 @@ p { margin: 0 0 1em; }
   gap: 28px;
   margin-bottom: 34px;
   flex-wrap: wrap;
+  object-fit: contain;
 }
 .emblem-slot {
   width: 88px;
@@ -327,7 +367,7 @@ p { margin: 0 0 1em; }
   border-radius: 50%;
   flex-shrink: 0;
 }
-.emblem-slot .photo-slot { border-radius: 50%; font-size: 0.58rem; padding: 6px; }
+.emblem-slot .photo-slot { border-radius: 50%; font-size: 0.58rem; padding: 6px; }  
 .hero-titles { text-align: center; }
 .hero-titles .eyebrow {
   font-family: var(--font-mono);
@@ -388,10 +428,7 @@ p { margin: 0 0 1em; }
 }
 
 /* Quick nav grid on the landing page */
-.quicknav {
-  background: var(--paper);
-  padding: 56px 0;
-}
+.quicknav { background: var(--paper); padding: 56px 0; }
 .quicknav-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -412,16 +449,8 @@ p { margin: 0 0 1em; }
   color: var(--red);
   letter-spacing: 0.1em;
 }
-.quicknav-card h3 {
-  font-size: 1.02rem;
-  margin: 8px 0 6px;
-  color: var(--navy-deep);
-}
-.quicknav-card p {
-  font-size: 0.88rem;
-  color: var(--ink-soft);
-  margin: 0;
-}
+.quicknav-card h3 { font-size: 1.02rem; margin: 8px 0 6px; color: var(--navy-deep); }
+.quicknav-card p { font-size: 0.88rem; color: var(--ink-soft); margin: 0; }
 
 /* ==========================================================================
    SECTION SCAFFOLDING
@@ -512,14 +541,20 @@ p { margin: 0 0 1em; }
   padding: 20px;
   text-align: center;
 }
-.officer-card .photo-slot {
-  width: 120px;
-  height: 120px;
+.officer-photo {
+  width: 200px;
+  height: 250px;
   margin: 0 auto 16px;
-  border-radius: 50%;
-  color: var(--sky-light);
-  border-color: rgba(255,255,255,0.35);
-  background: rgba(255,255,255,0.03);
+  border-radius: 0%;
+  overflow: hidden;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.officer-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .officer-card .o-name {
   font-family: var(--font-display);
@@ -537,11 +572,7 @@ p { margin: 0 0 1em; }
   text-transform: uppercase;
   margin-bottom: 6px;
 }
-.officer-card .o-unit {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.65);
-  margin: 0;
-}
+.officer-card .o-unit { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin: 0; }
 
 /* ==========================================================================
    CARDS / GENERIC GRID
@@ -661,12 +692,7 @@ p { margin: 0 0 1em; }
   color: var(--ink-soft);
   align-self: center;
 }
-.gallery-tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 26px;
-  flex-wrap: wrap;
-}
+.gallery-tabs { display: flex; gap: 10px; margin-bottom: 26px; flex-wrap: wrap; }
 .gallery-tab {
   font-family: var(--font-display);
   font-size: 0.82rem;
@@ -683,13 +709,7 @@ p { margin: 0 0 1em; }
 .gallery-tab:hover { background: var(--navy); color: var(--white); }
 
 .gallery-groups { display: flex; flex-direction: column; gap: 44px; }
-.gallery-event-head {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 6px;
-}
+.gallery-event-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
 .gallery-event-head h3 { margin: 0; font-size: 1.15rem; }
 .gallery-event .ge-sub {
   font-family: var(--font-mono);
@@ -719,10 +739,11 @@ p { margin: 0 0 1em; }
 }
 
 /* ==========================================================================
-   OPPORTUNITIES PAGE
+   OPPORTUNITIES PAGE — base blocks
    ========================================================================== */
 .opp-block { margin-bottom: 52px; }
-.opp-block h2 { font-size: 1.35rem; display: flex; align-items: center; gap: 12px; }
+.opp-block > h2:first-child,
+.opp-block h2 { font-size: 1.35rem; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .opp-block h2 .opp-tag {
   font-family: var(--font-mono);
   font-size: 0.62rem;
@@ -731,7 +752,8 @@ p { margin: 0 0 1em; }
   padding: 3px 8px;
   letter-spacing: 0.06em;
 }
-.table-scroll {
+.table-scroll,
+.table-container {
   overflow-x: auto;
   margin: 16px 0;
   box-shadow: var(--shadow-card);
@@ -749,15 +771,19 @@ p { margin: 0 0 1em; }
   text-align: left;
   padding: 10px 14px;
   border-bottom: 1px solid rgba(11,42,78,0.12);
+  color: var(--ink);
 }
 .opp-block th {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   background: var(--navy-deep);
   color: var(--white);
+  font-weight: 500;
 }
+.opp-block th small { color: rgba(255,255,255,0.65); }
+.opp-block td small { color: var(--ink-soft); }
 .note-box {
   border-left: 4px solid var(--gold);
   background: rgba(201,162,39,0.08);
@@ -765,29 +791,173 @@ p { margin: 0 0 1em; }
   font-size: 0.88rem;
   color: var(--ink-soft);
   margin: 18px 0;
+  line-height: 1.7;
+}
+.note-box.song-box {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-style: italic;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.9;
+  border-left-color: var(--sky);
+  background: rgba(46,143,196,0.06);
+}
+
+/* ==========================================================================
+   OPPORTUNITIES PAGE — deep-dive explainer content
+   ========================================================================== */
+.detailed-explainer {
+  margin-top: 28px;
+  padding: 24px 26px;
+  background: var(--white);
+  border: 1px solid rgba(11,42,78,0.1);
+  border-top: 3px solid var(--navy);
+  box-shadow: var(--shadow-card);
+}
+.detailed-explainer > h3:first-child { margin-top: 0; }
+.detailed-explainer h3 {
+  color: var(--navy-deep);
+  font-size: 1.08rem;
+  margin-top: 36px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(11,42,78,0.12);
+}
+.detailed-explainer h4 {
+  color: var(--red-deep);
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  margin-top: 26px;
+}
+.detailed-explainer h5 {
+  color: var(--navy);
+  font-size: 0.8rem;
+  margin-top: 18px;
+  letter-spacing: 0.04em;
+}
+.detailed-explainer p,
+.detailed-explainer li { color: var(--ink-soft); font-size: 0.94rem; }
+.detailed-explainer ul { margin-top: 8px; }
+
+.pro-tip-box {
+  margin: 22px 0 6px;
+  padding: 16px 20px;
+  background: var(--navy-deep);
+  color: rgba(255,255,255,0.9);
+  border-left: 4px solid var(--gold);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+.pro-tip-box strong { color: var(--gold-light); }
+
+.ssb-mindset-note {
+  background: rgba(178,31,45,0.05);
+}
+.ssb-mindset-note u { text-decoration-color: var(--red); }
+
+.ncc-advantage-tag {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(46,143,196,0.08);
+  border-left: 3px solid var(--sky);
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.ncc-advantage-tag strong { color: var(--navy); }
+
+.strategy-note {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: rgba(201,162,39,0.1);
+  border-left: 3px solid var(--gold);
+  font-size: 0.88rem !important;
+  color: var(--ink-soft) !important;
+}
+
+.overlay-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--sky);
+  color: var(--white);
+  padding: 2px 7px;
+  border-radius: 999px;
+  margin-left: 4px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.quick-stats {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  background: var(--paper-dim);
+  border: 1px solid rgba(11,42,78,0.12);
+  padding: 12px 16px;
+  margin: 14px 0;
+  color: var(--navy);
+  line-height: 1.8;
+}
+
+.paper-breakdown-container {
+  margin-top: 18px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(11,42,78,0.2);
+}
+.paper-breakdown-container > h3:first-child { margin-top: 4px; }
+.paper-block {
+  background: var(--paper);
+  border: 1px solid rgba(11,42,78,0.12);
+  border-left: 4px solid var(--navy);
+  padding: 20px 22px;
+  margin-top: 20px;
+}
+.paper-block.gat-paper { border-left-color: var(--red); }
+.gat-subsections { margin-top: 14px; }
+
+.center-tags { margin: 14px 0; line-height: 2.4; }
+.location-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.03em;
+  background: var(--white);
+  border: 1px solid rgba(11,42,78,0.25);
+  color: var(--navy);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.cutoff-section {
+  margin-top: 30px;
+  padding: 24px 26px;
+  background: var(--paper-dim);
+  border-top: 3px solid var(--gold);
+}
+.cutoff-section h3 { margin-top: 0; }
+.table-caption { font-size: 0.84rem; color: var(--ink-soft); margin-top: 10px; }
+
+.ssb-card { border-left: 4px solid var(--navy); margin-bottom: 22px; }
+.ssb-closing-text {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  border-top: 1px solid rgba(11,42,78,0.12);
+  padding-top: 20px;
+  margin-top: 8px;
 }
 
 /* ==========================================================================
    FOOTER
    ========================================================================== */
-.site-footer {
-  background: var(--navy-deep);
-  color: rgba(255,255,255,0.7);
-  padding: 44px 0 26px;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 34px;
-  margin-bottom: 30px;
-}
-.footer-grid h4 {
-  color: var(--gold-light);
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-}
+.site-footer { background: var(--navy-deep); color: rgba(255,255,255,0.7); padding: 44px 0 26px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 34px; margin-bottom: 30px; }
+.footer-grid h4 { color: var(--gold-light); font-size: 0.85rem; letter-spacing: 0.08em; }
 .footer-grid p, .footer-grid li { font-size: 0.85rem; line-height: 1.7; }
 .footer-grid ul { list-style: none; padding: 0; margin: 0; }
+.footer-grid li { margin-bottom: 0; }
 .footer-grid a:hover { color: var(--white); text-decoration: underline; }
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.12);
@@ -799,22 +969,14 @@ p { margin: 0 0 1em; }
   flex-wrap: wrap;
   gap: 8px;
 }
-@media (max-width: 760px) {
-  .footer-grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; } }
 
-/* Reveal-on-scroll (subtle, respects reduced motion) */
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
+/* Reveal-on-scroll */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.in-view { opacity: 1; transform: translateY(0); }
 
 /* ==========================================================================
-   PHONE BREAKPOINT — most cadets and visitors will land here first.
-   Tightens spacing, shrinks the masthead, and stacks anything still
-   competing for horizontal room above 480px.
+   PHONE BREAKPOINT
    ========================================================================== */
 @media (max-width: 600px) {
   .container { padding: 0 16px; }
@@ -837,15 +999,19 @@ p { margin: 0 0 1em; }
 
   .quicknav { padding: 40px 0; }
   .officer-card { padding: 16px; }
-  .officer-card .photo-slot { width: 96px; height: 96px; }
+  .officer-photo { width: 100px; height: 100px; }
 
   .news-item { padding: 16px 0; }
   .achiever-card .photo-slot { height: 150px; }
   .alumni-block { padding: 24px 0; gap: 18px; }
   .alumni-block .photo-slot { height: 190px; }
 
-  .opp-block h2 { font-size: 1.12rem; flex-wrap: wrap; }
-  .opp-block th, .opp-block td { padding: 8px 10px; font-size: 0.85rem; }
+  .opp-block h2 { font-size: 1.1rem; }
+  .opp-block th, .opp-block td { padding: 8px 10px; font-size: 0.82rem; }
+  .detailed-explainer { padding: 18px 16px; }
+  .detailed-explainer h3 { font-size: 1rem; }
+  .paper-block { padding: 16px 16px; }
+  .cutoff-section { padding: 18px 16px; }
 
   .gallery-toolbar { padding: 16px; gap: 16px; }
   .toolbar-field select { min-width: 130px; width: 100%; }
@@ -853,11 +1019,10 @@ p { margin: 0 0 1em; }
   .gallery-strip { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
 
   .signal-divider { margin: 40px 0 24px; }
-
   .footer-grid { gap: 26px; }
 }
 
 @media (max-width: 380px) {
-  .nav-brand .brand-text .secondary { display: none; } /* keep the bar on one line on the narrowest phones */
+  .nav-brand .brand-text .secondary { display: none; }
   .hero-titles h1 .sub { font-size: 0.5em; }
 }
