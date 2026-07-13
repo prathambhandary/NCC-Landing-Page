@@ -3,14 +3,14 @@
     "designation": "Care Taker Officer (CTO)",
     "name": "CTO Shailesh Acharya",
     "unit": "Manipal Jnanasudha Naval Sub Unit",
-    "photo": "static/images/officers/ano_shailesh_acharya.jpg",
+    "photo": "images/officers/cto.jpg",
     "photo_note": "[PHOTO: CTO Shailesh Acharya, official portrait, 400x400px, plain background]"
   },
   {
     "designation": "Commanding Officer (CO)",
     "name": "Commander Ashwin M Rao",
     "unit": "6 Kar Naval Unit NCC",
-    "photo": "static/images/officers/co.jpg",
+    "photo": "images/officers/co.jpg",
     "photo_note": "[PHOTO: Commanding Officer, 6 Kar Naval Unit NCC, official portrait, 400x400px]"
   },
   {
