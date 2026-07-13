@@ -6,9 +6,15 @@
 <section class="hero">
   <div class="container">
     <div class="hero-emblems">
-      <div class="emblem-slot"><div class="photo-slot"><img src="{{ url_for('static', filename='images/branding/ncclogo.png') }}" alt="NCC LOGO"></div></div>
-      <div class="emblem-slot"><div class="photo-slot">[INDIAN<br>FLAG<br>ASSET<br>120x120]</div></div>
-      <div class="emblem-slot"><div class="photo-slot">[INDIAN<br>NAVY<br>CREST<br>120x120]</div></div>
+      <div class="emblem-slot"><div class="photo-slot">
+        <img src="{{ url_for('static', filename='images/branding/ncc_logo.png') }}" alt="NCC LOGO">
+      </div></div>
+      <div class="emblem-slot"><div class="photo-slot">
+        <img src="{{ url_for('static', filename='images/branding/india_flag.png') }}" alt="NCC LOGO">
+      </div></div>
+      <div class="emblem-slot"><div class="photo-slot">
+        <img src="{{ url_for('static', filename='images/branding/navy_logo.png') }}" alt="NCC LOGO">
+      </div></div>
     </div>
     <div class="hero-titles">
       <span class="eyebrow">NATIONAL CADET CORPS &mdash; NAVAL WING</span>
@@ -19,23 +25,25 @@
       <p class="directorate">{{ parent_unit }} &nbsp;&middot;&nbsp; {{ directorate }}</p>
     </div>
     <p class="hero-lede">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. The Naval Sub Unit at Manipal
-      Jnanasudha trains cadets of Class XI and XII for the NCC &lsquo;B&rsquo; Certificate
-      examination, building discipline, seamanship and leadership alongside academics.
+      The Naval Sub Unit at Manipal Jnanasudha trains cadets of Classes XI and XII 
+      from both the Manipal and Udupi Jnanasudha campuses for the NCC &lsquo;B&rsquo; Certificate 
+      examination, building discipline, seamanship and leadership alongside their academics 
+      and rigorous competitive examination training.
     </p>
+    
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="num">{{ cadet_strength }}+</div>
+        <div class="num">~{{ cadet_strength }}</div>
         <div class="label">Cadets on Roll</div>
       </div>
       <div class="hero-stat">
         <div class="num">XI &ndash; XII</div>
         <div class="label">Class Eligibility</div>
       </div>
-      <div class="hero-stat">
+      <!-- <div class="hero-stat">
         <div class="num">1</div>
         <div class="label">CTO / ANO</div>
-      </div>
+      </div> -->
       <div class="hero-stat">
         <div class="num">B Cert</div>
         <div class="label">Certification Track</div>
@@ -111,13 +119,18 @@
     <div class="section-head">
       <div>
         <span class="eyebrow">Chain of Command</span>
-        <h2>Officers of the Unit</h2>
+        <h2>Officers In-Charge</h2>
       </div>
     </div>
     <div class="officers-grid">
       {% for o in officers %}
       <div class="officer-card reveal">
-        <div class="photo-slot">{{ o.photo_note }}</div>
+        <!-- <div class="photo-slot"><img src="{{ url_for('static', filename=o.photo) }}" alt="NCC LOGO"></div> -->
+        <img
+            style="height: 320px; width: auto; object-fit: contain; display: block; margin: 0 auto;"
+            src="{{ url_for('static', filename=o.photo) }}"
+            alt="{{ o.name }}"
+        >
         <div class="o-name">{{ o.name }}</div>
         <div class="o-role">{{ o.designation }}</div>
         <p class="o-unit">{{ o.unit }}</p>

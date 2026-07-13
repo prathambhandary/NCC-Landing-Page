@@ -3,24 +3,28 @@
     "date": "2026-07-08",
     "title": "Pre-Camp Firing Practice Concluded",
     "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cadets completed their preparatory firing practice ahead of the upcoming annual training camp.",
-    "tag": "Training"
+    "tag": "Training",
+    "display": true
   },
   {
     "date": "2026-06-28",
     "title": "Blood Donation Camp Organised on Campus",
     "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. The Naval wing coordinated with the college health centre to organise a blood donation drive.",
-    "tag": "Community Service"
+    "tag": "Community Service",
+    "display": true
   },
   {
     "date": "2026-06-15",
     "title": "B Certificate Examination Schedule Released",
     "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Second-year cadets can check the examination schedule and syllabus breakdown at the unit office.",
-    "tag": "Notice"
+    "tag": "Notice",
+    "display": true
   },
   {
     "date": "2026-05-30",
     "title": "Selection List for Republic Day Camp Screening",
     "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cadets shortlisted for the upcoming screening are requested to report for additional drill practice.",
-    "tag": "Camp"
+    "tag": "Camp",
+    "display": true
   }
 ]

@@ -4,7 +4,7 @@ Manipal Jnanasudha NCC Naval Sub Unit - Website
 
 Flask application entry point.
 Run with:  python app.py
-"""
+""" 
 
 import json
 from pathlib import Path

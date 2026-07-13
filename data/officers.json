@@ -1,6 +1,6 @@
 [
   {
-    "designation": "Associate NCC Officer (ANO) / CTO",
+    "designation": "Care Taker Officer (CTO)",
     "name": "CTO Shailesh Acharya",
     "unit": "Manipal Jnanasudha Naval Sub Unit",
     "photo": "static/images/officers/ano_shailesh_acharya.jpg",
@@ -8,23 +8,23 @@
   },
   {
     "designation": "Commanding Officer (CO)",
-    "name": "[NAME PENDING]",
+    "name": "Commander Ashwin M Rao",
     "unit": "6 Kar Naval Unit NCC",
     "photo": "static/images/officers/co.jpg",
     "photo_note": "[PHOTO: Commanding Officer, 6 Kar Naval Unit NCC, official portrait, 400x400px]"
   },
   {
-    "designation": "Group Commander",
-    "name": "[NAME PENDING]",
-    "unit": "NCC Group Headquarters, Karnataka & Goa Directorate",
-    "photo": "static/images/officers/group_commander.jpg",
+    "designation": "Deputy Director General (DDG)",
+    "name": "Air Commodore Kamal Chadha",
+    "unit": "Karnataka & Goa Directorate",
+    "photo": "images/officers/ddg_ncc.jpg",
     "photo_note": "[PHOTO: Group Commander, official portrait, 400x400px]"
   },
   {
     "designation": "Director General, NCC",
-    "name": "[NAME PENDING]",
+    "name": "Lieutenant General Virendra Vats",
     "unit": "National Cadet Corps, New Delhi",
-    "photo": "static/images/officers/dg_ncc.jpg",
+    "photo": "images/officers/dg_ncc.jpg",
     "photo_note": "[PHOTO: Director General NCC, official portrait, 400x400px]"
   }
 ]
