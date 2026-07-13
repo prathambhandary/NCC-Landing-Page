@@ -999,7 +999,7 @@ blockquote strong { color: var(--red-deep); }
 
   .quicknav { padding: 40px 0; }
   .officer-card { padding: 16px; }
-  .officer-photo { width: 350px; height: 450px; }
+  .officer-photo { width: 350px;  height: 450px; }
 
   .news-item { padding: 16px 0; }
   .achiever-card .photo-slot { height: 150px; }
