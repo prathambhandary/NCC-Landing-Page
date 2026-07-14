@@ -76,5 +76,30 @@
       { "src": "static/images/gallery/ncc/g0006_02.jpg", "note": "" },
       { "src": "static/images/gallery/ncc/g0006_03.jpg", "note": "" }
     ]
+  }, 
+  {
+    "id": "g0007",
+    "category": "ncc",
+    "title": "Indian Navy Day Celebration",
+    "subcategory": "Naval Awareness Activity",
+    "date": "2025-12-04",
+    "description": "NCC cadets of Manipal Jnanasudha celebrated Indian Navy Day by commemorating the achievements, dedication, and service of the Indian Navy. The activity provided cadets with an opportunity to understand the significance of naval operations, the history of the Indian Navy, and its vital role in safeguarding the nation's maritime interests. The celebration inspired cadets to develop greater respect for the armed forces while strengthening the values of patriotism, discipline, and commitment to service.",
+    "images": [
+      { "src": "static/images/gallery/ncc/g0007_01.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0007_02.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0007_03.jpg", "note": "" }
+    ]
+  },
+  {
+    "id": "g0008",
+    "category": "community",  
+    "title": "Community Awareness Marathon",
+    "subcategory": "Fitness & Social Outreach",
+    "date": "2026-02-28",
+    "description": "NCC cadets of Manipal Jnanasudha organised a 12 km marathon from Udyavara to the Manipal Jnanasudha PU College Campus as part of their community engagement initiative. The event promoted fitness, discipline, and a healthy lifestyle while creating awareness about the importance of physical well-being among participants and the community. Through this initiative, cadets demonstrated leadership, organisational skills, and their commitment to social responsibility.",
+    "images": [
+      { "src": "static/images/gallery/ncc/g0008_01.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0008_02.jpg", "note": "" }
+    ]
   }
 ]
