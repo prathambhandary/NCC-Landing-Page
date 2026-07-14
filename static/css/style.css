@@ -9,6 +9,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
+@font-face {
+  font-family: 'Swiss 921 Regular';
+  src: url('../fonts/Swiss 921 Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --navy-deep:  #061A33;
   --navy:       #0B2A4E;
