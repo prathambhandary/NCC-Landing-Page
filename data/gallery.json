@@ -37,5 +37,31 @@
       { "src": "static/images/gallery/ncc/g0003_01.jpg", "note": "" },
       { "src": "static/images/gallery/ncc/g0003_02.jpg", "note": "" }
     ]
+  },
+  {
+    "id": "g0004",
+    "category": "ncc",
+    "title": "Firing Practice",
+    "subcategory": "Training",
+    "date": "2026-03-25",
+    "description": "As part of the selection process for the Nau Sainik Camp (NSC), NCC cadets of Manipal Jnanasudha were given an opportunity to undergo firing practice at the MIT Firing Range. The training session helped cadets develop marksmanship skills, improve concentration, and enhance firearm handling under the supervision of qualified instructors. The activity also reinforced the values of discipline, precision, and responsibility, which are integral to NCC training.",
+    "images": [
+      { "src": "static/images/gallery/ncc/g0004_01.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0004_02.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0004_03.jpg", "note": "" }
+    ]
+  },
+  {
+    "id": "g0005",
+    "category": "ncc",
+    "title": "Republic Day Celebration",
+    "subcategory": "Parade",
+    "date": "2026-01-26",
+    "description": "NCC cadets of Manipal Jnanasudha proudly participated in the Republic Day celebrations by taking part in the ceremonial parade and paying tribute to the nation's democratic values and constitutional ideals. The event showcased the cadets' discipline, precision, and teamwork while fostering a strong sense of patriotism and national pride. The celebration also served as an opportunity for cadets to reaffirm their commitment to the ideals of unity, service, and responsible citizenship upheld by the National Cadet Corps.",
+    "images": [
+      { "src": "static/images/gallery/ncc/g0005_01.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0005_02.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0005_03.jpg", "note": "" }
+    ]
   }
 ]
