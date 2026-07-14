@@ -63,5 +63,18 @@
       { "src": "static/images/gallery/ncc/g0005_02.jpg", "note": "" },
       { "src": "static/images/gallery/ncc/g0005_03.jpg", "note": "" }
     ]
+  },
+  {
+    "id": "g0006",
+    "category": "ncc",
+    "title": "Boat Pulling Competition",
+    "subcategory": "Seamanship",
+    "date": "2026-02-27",
+    "description": "NCC cadets of Manipal Jnanasudha participated in the Boat Pulling activity conducted by 6 Karnataka Naval Unit NCC, Udupi, as part of their seamanship training. The event provided hands-on experience in naval traditions and tested the cadets' teamwork, coordination, physical endurance, and leadership skills. Working together to manoeuvre the boat efficiently, the cadets demonstrated discipline, determination, and effective communication, while gaining practical exposure to an important aspect of naval training.",
+    "images": [
+      { "src": "static/images/gallery/ncc/g0006_01.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0006_02.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0006_03.jpg", "note": "" }
+    ]
   }
 ]
