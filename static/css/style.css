@@ -378,8 +378,8 @@ blockquote strong { color: var(--red-deep); }
 .hero-titles { text-align: center; }
 .hero-titles .eyebrow {
   font-family: var(--font-mono);
-  /* color: var(--gold-light); */
-  color: #2e3092;
+  color: var(--gold-light);
+  /* color: #2e3092; */
   letter-spacing: 0.18em;
   font-size: 0.78rem;
   margin-bottom: 14px;
