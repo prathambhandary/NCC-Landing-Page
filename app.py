@@ -8,7 +8,13 @@ Run with:  python app.py
 
 import json
 from pathlib import Path
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_from_directory
+import secrets
+import os
+
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD") if os.environ.get("ADMIN_PASSWORD") else "admin123"  # default password
+ADMIN_TOKENS = {}  # simple in-memory token store
+
 
 app = Flask(__name__)
 
@@ -19,6 +25,35 @@ def load_json(filename):
     with open(DATA_DIR / filename, encoding="utf-8") as f:
         return json.load(f)
 
+
+# ---------------------------------------------------------------------------
+# ADMIN LOGIN – minimal auth (no CRUD)
+# ---------------------------------------------------------------------------
+
+
+
+# Serve the admin HTML page (place admin.html in static/)
+@app.route("/admin")
+def admin_panel():
+    return send_from_directory("templates", "admin.html")
+
+# Login endpoint
+@app.route("/api/admin/login", methods=["POST"])
+def admin_login():
+    data = request.get_json()
+    if not data or data.get("password") != ADMIN_PASSWORD:
+        return jsonify({"success": False, "error": "Invalid password"}), 401
+    token = secrets.token_urlsafe(32)
+    ADMIN_TOKENS[token] = True
+    return jsonify({"success": True, "token": token})
+
+# Verify token (used by the frontend on page load)
+@app.route("/api/admin/verify", methods=["GET"])
+def admin_verify():
+    token = request.headers.get("X-Admin-Token")
+    if token and token in ADMIN_TOKENS:
+        return jsonify({"valid": True})
+    return jsonify({"valid": False}), 401
 
 # ---------------------------------------------------------------------------
 # Context injected into every template
