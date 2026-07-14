@@ -182,7 +182,7 @@ blockquote strong { color: var(--red-deep); }
   font-size: 0.72rem;
   letter-spacing: 0.02em;
   line-height: 1.5;
-  padding: 14px;
+  padding: 5px;
   min-height: 100%;
   width: 100%;
   overflow: hidden; /* clip any real photo to the shape of its frame */
@@ -1025,4 +1025,36 @@ blockquote strong { color: var(--red-deep); }
 @media (max-width: 380px) {
   .nav-brand .brand-text .secondary { display: none; }
   .hero-titles h1 .sub { font-size: 0.5em; }
+} 
+
+.gallery-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.photo-slot {
+    width: 300px;
+}
+
+.photo-slot img {
+    /* width: 100%; */
+    /* height: 180px; */
+    object-fit: contain;
+    /* border-radius: 8px; */
+    display: block;
+}
+
+.photo-caption {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #666;
+    text-align: center;
+}
+
+.photo-slot img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }

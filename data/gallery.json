@@ -1,121 +1,28 @@
 [
   {
-    "id": "g001",
-    "category": "ncc",
-    "subcategory": "Camp",
-    "title": "Combined Annual Training Camp",
-    "date": "2026-05-12",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cadets underwent ten days of combined training including drill, weapon training and map reading.",
-    "images": [
-      {"src": "static/images/gallery/ncc/2026_catc_01.jpg", "note": "[PHOTO: CATC parade ground formation, 1600x1000px]"},
-      {"src": "static/images/gallery/ncc/2026_catc_02.jpg", "note": "[PHOTO: CATC obstacle course, 1600x1000px]"},
-      {"src": "static/images/gallery/ncc/2026_catc_03.jpg", "note": "[PHOTO: CATC tent lines, 1600x1000px]"}
-    ]
-  },
+  "id": "g0001",
+  "category": "community",
+  "subcategory": "Drug Awareness",
+  "title": "Anti-Drug Awareness Drive",
+  "date": "2026-06-07",
+  "description": "Cadets of Manipal Jnanasudha participated in an Anti-Drug Awareness Drive accompanied by the Executive Officer of 6 Karnataka Naval Unit NCC, Lt Cdr M. A. Multani, to promote awareness about the harmful effects of drug abuse and encourage a drug-free society.",
+  "images": [
+    { "src": "static/images/gallery/community/g0001_01.jpg", "note": "" },
+    { "src": "static/images/gallery/community/g0001_02.jpg", "note": "" },
+    { "src": "static/images/gallery/community/g0001_03.jpg", "note": "" },
+    { "src": "static/images/gallery/community/g0001_04.jpg", "note": "" }
+  ]
+},
   {
     "id": "g002",
     "category": "ncc",
-    "subcategory": "Boat Pulling",
+    "subcategory": "B oat Pulling",
     "title": "Boat Pulling Practice",
     "date": "2026-03-22",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Weekly whaler boat pulling practice conducted at the naval training pool.",
     "images": [
       {"src": "static/images/gallery/ncc/2026_boat_01.jpg", "note": "[PHOTO: Cadets rowing a whaler boat, 1600x1000px]"},
       {"src": "static/images/gallery/ncc/2026_boat_02.jpg", "note": "[PHOTO: Boat pulling instruction session, 1600x1000px]"}
-    ]
-  },
-  {
-    "id": "g003",
-    "category": "ncc",
-    "subcategory": "Firing",
-    "title": "Small Arms Firing Practice",
-    "date": "2026-01-18",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cadets practiced with .22 rifles under the supervision of the range safety officer.",
-    "images": [
-      {"src": "static/images/gallery/ncc/2026_firing_01.jpg", "note": "[PHOTO: Cadets in firing position at range, 1600x1000px]"},
-      {"src": "static/images/gallery/ncc/2026_firing_02.jpg", "note": "[PHOTO: Range safety briefing, 1600x1000px]"}
-    ]
-  },
-  {
-    "id": "g004",
-    "category": "community",
-    "subcategory": "Blood Donation",
-    "title": "Blood Donation Camp",
-    "date": "2026-06-28",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Organised jointly with the college health centre and a local blood bank.",
-    "images": [
-      {"src": "static/images/gallery/community/2026_blood_01.jpg", "note": "[PHOTO: Blood donation camp registration desk, 1600x1000px]"},
-      {"src": "static/images/gallery/community/2026_blood_02.jpg", "note": "[PHOTO: Cadets assisting donors, 1600x1000px]"}
-    ]
-  },
-  {
-    "id": "g005",
-    "category": "community",
-    "subcategory": "Cleanliness Drive",
-    "title": "Beach Cleaning Drive",
-    "date": "2026-02-05",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cadets took part in a coastal cleanliness drive as part of the Swachh Bharat initiative.",
-    "images": [
-      {"src": "static/images/gallery/community/2026_clean_01.jpg", "note": "[PHOTO: Cadets collecting waste on shoreline, 1600x1000px]"},
-      {"src": "static/images/gallery/community/2026_clean_02.jpg", "note": "[PHOTO: Group photo after the drive, 1600x1000px]"}
-    ]
-  },
-  {
-    "id": "g006",
-    "category": "ncc",
-    "subcategory": "Camp",
-    "title": "Republic Day Camp Screening",
-    "date": "2025-11-14",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Screening parade held to select cadets for the Republic Day Camp contingent.",
-    "images": [
-      {"src": "static/images/gallery/ncc/2025_rdc_01.jpg", "note": "[PHOTO: Screening parade line-up, 1600x1000px]"},
-      {"src": "static/images/gallery/ncc/2025_rdc_02.jpg", "note": "[PHOTO: Drill inspection, 1600x1000px]"}
-    ]
-  },
-  {
-    "id": "g007",
-    "category": "community",
-    "subcategory": "Tree Plantation",
-    "title": "Tree Plantation Drive",
-    "date": "2025-08-09",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cadets planted saplings across the campus grounds to mark Independence Day week.",
-    "images": [
-      {"src": "static/images/gallery/community/2025_plant_01.jpg", "note": "[PHOTO: Cadets planting saplings, 1600x1000px]"},
-      {"src": "static/images/gallery/community/2025_plant_02.jpg", "note": "[PHOTO: Watering newly planted saplings, 1600x1000px]"}
-    ]
-  },
-  {
-    "id": "g008",
-    "category": "ncc",
-    "subcategory": "Drill",
-    "title": "Independence Day Parade",
-    "date": "2025-08-15",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. The Naval sub unit marched at the campus Independence Day parade.",
-    "images": [
-      {"src": "static/images/gallery/ncc/2025_id_01.jpg", "note": "[PHOTO: Cadets marching in parade, 1600x1000px]"},
-      {"src": "static/images/gallery/ncc/2025_id_02.jpg", "note": "[PHOTO: Flag hoisting ceremony, 1600x1000px]"}
-    ]
-  },
-  {
-    "id": "g009",
-    "category": "community",
-    "subcategory": "Blood Donation",
-    "title": "World Blood Donor Day Camp",
-    "date": "2025-06-14",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Camp organised to mark World Blood Donor Day.",
-    "images": [
-      {"src": "static/images/gallery/community/2025_blood_01.jpg", "note": "[PHOTO: Blood donation in progress, 1600x1000px]"}
-    ]
-  },
-  {
-    "id": "g010",
-    "category": "ncc",
-    "subcategory": "Camp",
-    "title": "Thal Sainik Camp Contingent Send-off",
-    "date": "2024-10-02",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Send-off parade for cadets selected to represent the Directorate at TSC.",
-    "images": [
-      {"src": "static/images/gallery/ncc/2024_tsc_01.jpg", "note": "[PHOTO: Send-off parade, 1600x1000px]"}
     ]
   }
 ]
