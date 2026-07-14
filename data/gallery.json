@@ -16,13 +16,26 @@
   {
     "id": "g0002",
     "category": "ncc",
-    "subcategory": "B oat Pulling",
-    "title": "Boat Pulling Practice",
-    "date": "2026-03-22",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Weekly whaler boat pulling practice conducted at the naval training pool.",
+    "title": "Visit to Kota Shivaram Karanth Theme Park",
+    "subcategory": "8Field Visit",
+    "date": "2026-06-12",
+    "description": "As part of an educational field visit, NCC cadets of Manipal Jnanasudha visited the Kota Shivaram Karanth Theme Park to gain insights into the life and contributions of the renowned Jnanpith awardee, Dr. Kota Shivaram Karanth. The visit provided cadets with an opportunity to explore the park's cultural exhibits, sculptures, art gallery, library, and auditorium, fostering an appreciation for Karnataka's rich literary and cultural heritage. The activity also encouraged teamwork, discipline, observation, and learning beyond the classroom, reflecting the NCC's objective of developing well-informed and socially responsible citizens.",
     "images": [
-      {"src": "static/images/gallery/ncc/2026_boat_01.jpg", "note": "[PHOTO: Cadets rowing a whaler boat, 1600x1000px]"},
-      {"src": "static/images/gallery/ncc/2026_boat_02.jpg", "note": "[PHOTO: Boat pulling instruction session, 1600x1000px]"}
+      { "src": "static/images/gallery/ncc/g0002_01.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0002_02.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0002_03.jpg", "note": "" }
+    ]
+  },
+  {
+    "id": "g0003",
+    "category": "ncc",
+    "title": "Visit to the MiG-29 Fighter Jet Monument",
+    "subcategory": "Field Visit",
+    "date": "2026-06-13",
+    "description": "As part of the educational field visit, NCC cadets of Manipal Jnanasudha visited the MiG-29 Fighter Jet Monument to learn about the Indian Air Force's contribution to safeguarding the nation. The visit introduced cadets to the significance of the MiG-29 as a frontline fighter aircraft and highlighted the dedication, courage, and professionalism of the armed forces. The experience inspired cadets to develop a deeper sense of patriotism, discipline, and respect for the nation's defence services while reinforcing the core values and objectives of the National Cadet Corps.",
+    "images": [
+      { "src": "static/images/gallery/ncc/g0003_01.jpg", "note": "" },
+      { "src": "static/images/gallery/ncc/g0003_02.jpg", "note": "" }
     ]
   }
 ]
