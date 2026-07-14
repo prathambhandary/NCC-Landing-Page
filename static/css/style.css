@@ -154,9 +154,9 @@ blockquote strong { color: var(--red-deep); }
   height: 14px;
   clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
-.signal-divider .flags span:nth-child(1) { background: var(--gold); }
-.signal-divider .flags span:nth-child(2) { background: var(--red); }
-.signal-divider .flags span:nth-child(3) { background: var(--sky); }
+.signal-divider .flags span:nth-child(1) { background: #ef1c24; }
+.signal-divider .flags span:nth-child(2) { background: #2e3092; }
+.signal-divider .flags span:nth-child(3) { background: #00aeef; }
 
 .log-date {
   font-family: var(--font-mono);
