@@ -1,29 +1,15 @@
 [
   {
-    "date": "2026-07-08",
-    "title": "Pre-Camp Firing Practice Concluded",
-    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cadets completed their preparatory firing practice ahead of the upcoming annual training camp.",
-    "tag": "Training",
+    "date": "2026-07-01",
+    "title": "CATC 2026 at NITK Surathkal Commenced",
+    "summary": "Cadets of Manipal Jnanasudha from the 6 Kar Naval Unit joined approximately 555 NCC cadets at the NITK Surathkal campus for the official commencement of the 10 day Combined Annual Training Camp (CATC MLORE-11), uniting nine different wings and battalions under the NCC Group Headquarters, Mangaluru.",
+    "tag": "Camp",
     "display": true
   },
   {
-    "date": "2026-06-28",
-    "title": "Blood Donation Camp Organised on Campus",
-    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. The Naval wing coordinated with the college health centre to organise a blood donation drive.",
-    "tag": "Community Service",
-    "display": true
-  },
-  {
-    "date": "2026-06-15",
-    "title": "B Certificate Examination Schedule Released",
-    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Second-year cadets can check the examination schedule and syllabus breakdown at the unit office.",
-    "tag": "Notice",
-    "display": true
-  },
-  {
-    "date": "2026-05-30",
-    "title": "Selection List for Republic Day Camp Screening",
-    "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cadets shortlisted for the upcoming screening are requested to report for additional drill practice.",
+    "date": "2026-07-10",
+    "title": "CATC 2026 at NITK Surathkal Concluded",
+    "summary": "The 10-day camp successfully concluded following intensive training in drills, weapon handling and a specialized cyber safety module by NITK Staff. The collaborative training provided 6 Kar Naval Unit cadets with critical physical fitness and safety skills alongside multiple wings from the Mangaluru Group.",
     "tag": "Camp",
     "display": true
   }
