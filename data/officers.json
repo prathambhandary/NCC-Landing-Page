@@ -2,7 +2,7 @@
   {
     "designation": "Care Taker Officer (CTO)",
     "name": "CTO Shailesh Acharya",
-    "unit": "Manipal Jnanasudha Naval Sub Unit NCC",
+    "unit": "Manipal Jnanasudha Naval Sub Unit",
     "photo": "images/officers/cto.jpg",
     "photo_note": "[PHOTO: CTO Shailesh Acharya, official portrait, 400x400px, plain background]"
   },
@@ -14,9 +14,9 @@
     "photo_note": "[PHOTO: Commanding Officer, 6 Kar Naval Unit NCC, official portrait, 400x400px]"
   },
   {
-    "designation": "Deputy Director General (DDG)",
+    "designation": "Deputy Director General (DDG), NCC",
     "name": "Air Commodore Kamal Chadha",
-    "unit": "Karnataka & Goa Directorate, NCC",
+    "unit": "Karnataka & Goa Directorate",
     "photo": "images/officers/ddg_ncc.jpg",
     "photo_note": "[PHOTO: Group Commander, official portrait, 400x400px]"
   },
