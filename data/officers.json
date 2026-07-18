@@ -14,6 +14,13 @@
     "photo_note": "[PHOTO: Commanding Officer, 6 Kar Naval Unit NCC, official portrait, 400x400px]"
   },
   {
+    "designation": "Group Commanding Officer",
+    "name": "",
+    "unit": "Mangalore Group HQ NCC",
+    "photo": "images/officers/gco.jpg",
+    "photo_note": "[PHOTO: Group Commanding Officer, Mangalore Group HQ NCC, official portrait, 400x400px]"
+  },
+  {
     "designation": "Deputy Director General (DDG)",
     "name": "Air Commodore Kamal Chadha",
     "unit": "Karnataka & Goa Directorate",
