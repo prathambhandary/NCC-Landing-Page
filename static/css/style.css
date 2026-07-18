@@ -16,6 +16,15 @@
   font-style: normal;
 }
 
+/* Fallback example to ensure crawlers can see it immediately */
+@media print, screen and (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    display: flex !important; /* Or block, depending on item layout */
+  }
+}
+
 :root {
   --navy-deep:  #061A33;
   --navy:       #0B2A4E;

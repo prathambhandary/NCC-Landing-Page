@@ -6,6 +6,8 @@
 <title>{% block title %}{{ unit_name }}{% endblock %} — {{ unit_name }}</title>
 <meta name="description" content="Official website of the {{ unit_name }}, {{ parent_unit }}, {{ directorate }}.">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+{% block structured_data %}{% endblock %}
 </head>
 <body>
 
@@ -67,7 +69,7 @@
           <li>Manipal Jnanasudha Pre-University College</li>
           <li>Vidyanagar, Manipal, Karnataka</li>
           <li>contact@email.com</li>
-          <li>[CONTACT PHONE PENDING]</li>
+          <li>+91 88263 36785</li>
         </ul>
       </div>
     </div>

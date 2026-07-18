@@ -1,21 +1,49 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Manipal Jnanasudha NCC Naval Sub Unit",
+  "alternateName": "National Cadet Corps - Naval Wing Manipal Jnanasudha",
+  "description": "The Naval Sub Unit at Manipal Jnanasudha trains cadets of Classes XI and XII from Manipal and Udupi campuses for the NCC 'B' Certificate examination.",
+  "parentOrganization": {
+    "@type": "GovernmentOrganization",
+    "name": "{{ parent_unit }}",
+    "subOrganization": {
+      "@type": "GovernmentOrganization",
+      "name": "{{ directorate }}"
+    }
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Vidyanagar, Manipal",
+    "addressRegion": "Karnataka",
+    "addressCountry": "IN"
+  },
+  "eligibilityRequirements": "Classes XI and XII students",
+  "award": "NCC 'B' Certificate"
+}
+</script>
+{% endblock %}
+
 {% block content %}
 
 <section class="hero">
   <div class="container">
     <div class="hero-emblems">
       <div class="emblem-slot" style="display: flex; justify-content: center; align-items: center;">
-        <img src="{{ url_for('static', filename='images/branding/ncc_logo.png') }}" alt="NCC Logo">
+        <img src="{{ url_for('static', filename='images/branding/ncc_logo.png') }}" alt="Official emblem of the National Cadet Corps (NCC) India">
       </div>
 
       <div class="emblem-slot" style="display: flex; justify-content: center; align-items: center;">
-        <img src="{{ url_for('static', filename='images/branding/india_flag.png') }}" alt="Indian Flag">
+        <img src="{{ url_for('static', filename='images/branding/india_flag.png') }}" alt="National Flag of India Tricolor">
       </div>
 
       <div class="emblem-slot" style="display: flex; justify-content: center; align-items: center;">
-        <img src="{{ url_for('static', filename='images/branding/navy_logo.png') }}" alt="Indian Navy Crest">
+        <img src="{{ url_for('static', filename='images/branding/navy_logo.png') }}" alt="Official Crest of the Indian Navy Naval Wing">
       </div>
     </div>
     <div class="hero-titles">
@@ -70,8 +98,8 @@
       </a>
       <a class="quicknav-card reveal" href="{{ url_for('opportunities') }}">
         <span class="qn-index">EXAMS & CAREERS</span>
-        <h3>Reservations in State & National Level Entrance Exams, NDA exam detailed Road </h3>
-        <p>Everything the &lsquo;B&rsquo; Certificate unlocks &mdash; from SSB rounds to degree admissions.</p>
+        <h3>Reservations &amp; NDA Exam Roadmaps</h3>
+        <p>Detailed pathways for the &lsquo;B&rsquo; Certificate &mdash; from SSB interview advantages to national entrance exam marks reservations.</p>
       </a>
       <!-- <a class="quicknav-card reveal" href="{{ url_for('achievers') }}">
         <span class="qn-index">ACHIEVERS</span>
@@ -128,7 +156,7 @@
       {% for o in officers %}
       <div class="officer-card reveal">
         <div class="officer-photo">
-          <img src="{{ url_for('static', filename=o.photo) }}" alt="{{ o.name }}">
+          <img src="{{ url_for('static', filename=o.photo) }}" alt="Portrait photograph of {{ o.name }}, {{ o.designation }}">
         </div>
         <div class="o-name">{{ o.name }}</div>
         <div class="o-role">{{ o.designation }}</div>
