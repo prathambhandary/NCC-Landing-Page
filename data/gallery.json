@@ -95,11 +95,30 @@
     "category": "community",  
     "title": "Community Awareness Marathon",
     "subcategory": "Fitness & Social Outreach",
-    "date": "2026-02-28",
+    "date": "2026-02-26",
     "description": "NCC cadets of Manipal Jnanasudha organised a 12 km marathon from Udyavara to the Manipal Jnanasudha PU College Campus as part of their community engagement initiative. The event promoted fitness, discipline, and a healthy lifestyle while creating awareness about the importance of physical well-being among participants and the community. Through this initiative, cadets demonstrated leadership, organisational skills, and their commitment to social responsibility.",
     "images": [
       { "src": "static/images/gallery/ncc/g0008_01.jpg", "note": "" },
       { "src": "static/images/gallery/ncc/g0008_02.jpg", "note": "" }
+    ]
+  },
+  {
+    "id": "g0009",
+    "category": "ncc",  
+    "title": "Visit to INS Kadamba and aircraft carrier INS Vikramaditya",
+    "subcategory": "Ship Visit",
+    "date": "2026-02-28",
+    "description": "Under the aegis of the 6 Kar Naval Unit, five selected cadets from the Manipal Jnanasudha Naval Sub-Unit were granted an exclusive opportunity to visit the INS Kadamba Naval Base in Karwar and the flagship aircraft carrier INS Vikramaditya. The study tour allowed cadets to explore advanced naval technology, modern weapon systems and experience the realities of life at sea firsthand.",
+    "images": [   
+      { 
+        "src": "static/images/gallery/ncc/g0009_01.jpg"
+      },
+      { 
+        "src": "static/images/gallery/ncc/g0009_02.jpg"
+      },
+      { 
+        "src": "static/images/gallery/ncc/g0009_03.jpg" 
+      }
     ]
   }
 ]
