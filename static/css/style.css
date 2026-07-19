@@ -1158,3 +1158,107 @@ blockquote strong { color: var(--red-deep); }
   .detailed-explainer h4 { font-size: 0.82rem; }
   .quick-stats { font-size: 0.72rem; }
 }
+
+/* --------------------------------------------------------------------------
+   JUMP NAV — indexed section dropdown, sits under the page banner
+   -------------------------------------------------------------------------- */
+.jump-nav {
+  background: var(--navy-deep);
+  border-bottom: 3px solid var(--gold);
+  padding: 18px 0;
+}
+.jump-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.jump-nav-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.jump-nav-index {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--navy-deep);
+  background: var(--gold);
+  padding: 4px 9px;
+  flex-shrink: 0;
+}
+.jump-nav-head h2 {
+  color: var(--white);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.jump-nav-select-wrap {
+  position: relative;
+  min-width: 280px;
+  flex-shrink: 0;
+}
+.jump-nav-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: var(--radius);
+  padding: 10px 38px 10px 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.jump-nav-select:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.45);
+}
+.jump-nav-select:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.jump-nav-select option {
+  background: var(--navy-deep);
+  color: var(--white);
+}
+.jump-nav-select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--gold-light);
+  border-bottom: 2px solid var(--gold-light);
+  transform: translateY(-65%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* Anchor targets shouldn't hide under the sticky header + jump-nav */
+.opp-block { scroll-margin-top: 90px; }
+
+@media (max-width: 900px) {
+  .jump-nav-inner { justify-content: flex-start; }
+  .jump-nav-select-wrap { min-width: 240px; }
+}
+
+@media (max-width: 600px) {
+  .jump-nav { padding: 14px 0; }
+  .jump-nav-inner { flex-direction: column; align-items: stretch; gap: 12px; }
+  .jump-nav-head { justify-content: flex-start; }
+  .jump-nav-head h2 { font-size: 0.85rem; }
+  .jump-nav-select-wrap { min-width: 0; width: 100%; }
+  .jump-nav-select { font-size: 0.8rem; padding: 11px 38px 11px 12px; }
+  .opp-block { scroll-margin-top: 78px; }
+}
+
+@media (max-width: 380px) {
+  .jump-nav-index { font-size: 0.58rem; padding: 3px 7px; }
+  .jump-nav-head h2 { font-size: 0.78rem; letter-spacing: 0.02em; }
+}
