@@ -1075,3 +1075,47 @@ blockquote strong { color: var(--red-deep); }
   max-width: 100%;
   height: auto;
 }
+
+/* --------------------------------------------------------------------------
+   JUMP NAV — horizontal pill scroller, sits under the page banner
+   -------------------------------------------------------------------------- */
+.jump-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 14px 24px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  background: var(--paper-dim);
+  border-bottom: 1px solid rgba(11,42,78,0.12);
+}
+.jump-nav::-webkit-scrollbar { display: none; }
+.jump-nav a {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--white);
+  border: 1px solid rgba(11,42,78,0.25);
+  padding: 7px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.jump-nav a:hover,
+.jump-nav a:focus-visible {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+
+/* Anchor targets shouldn't hide under the sticky header */
+.opp-block { scroll-margin-top: 84px; }
+
+@media (max-width: 900px) {
+  .opp-block { scroll-margin-top: 74px; }
+}
