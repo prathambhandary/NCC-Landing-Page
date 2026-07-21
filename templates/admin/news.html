@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Manage News</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            margin:40px;
+            background:#f5f5f5;
+        }
+
+        .card{
+            background:white;
+            padding:20px;
+            margin-bottom:20px;
+            border-radius:10px;
+            box-shadow:0 2px 8px rgba(0,0,0,.1);
+        }
+
+        input,textarea,select{
+            width:100%;
+            padding:10px;
+            margin:8px 0;
+        }
+
+        textarea{
+            height:120px;
+            resize:vertical;
+        }
+
+        button{
+            padding:10px 20px;
+            cursor:pointer;
+        }
+
+        .top{
+            margin-bottom:25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>News Manager</h1>
+
+<div class="top">
+    <button onclick="addNews()">Add News</button>
+    <button onclick="save()">Save Changes</button>
+</div>
+
+<div id="container">
+
+{% for item in news %}
+
+<div class="card">
+
+<label>Date</label>
+<input class="date" value="{{item.date}}">
+
+<label>Title</label>
+<input class="title" value="{{item.title}}">
+
+<label>Summary</label>
+<textarea class="summary">{{item.summary}}</textarea>
+
+<label>Tag</label>
+<input class="tag" value="{{item.tag}}">
+
+<label>
+<input type="checkbox"
+class="display"
+{% if item.display %}checked{% endif %}>
+Display
+</label>
+
+<button onclick="this.parentElement.remove()">
+Delete
+</button>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<script>
+
+function addNews(){
+
+const div=document.createElement("div");
+
+div.className="card";
+
+div.innerHTML=`
+
+<label>Date</label>
+<input class="date">
+
+<label>Title</label>
+<input class="title">
+
+<label>Summary</label>
+<textarea class="summary"></textarea>
+
+<label>Tag</label>
+<input class="tag">
+
+<label>
+<input class="display" type="checkbox" checked>
+Display
+</label>
+
+<button onclick="this.parentElement.remove()">
+Delete
+</button>
+
+`;
+
+document.getElementById("container").appendChild(div);
+
+}
+
+async function save(){
+
+const cards=document.querySelectorAll(".card");
+
+let news=[];
+
+cards.forEach(card=>{
+
+news.push({
+
+date:card.querySelector(".date").value,
+
+title:card.querySelector(".title").value,
+
+summary:card.querySelector(".summary").value,
+
+tag:card.querySelector(".tag").value,
+
+display:card.querySelector(".display").checked
+
+});
+
+});
+
+const r=await fetch("/admin/news/save",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+credentials:"same-origin",
+
+body:JSON.stringify(news)
+
+});
+
+if(r.ok){
+
+alert("Saved!");
+
+}
+
+else{
+
+alert("Failed");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,3 +1,4 @@
 trash
 .env
 __pycache__
+test.py

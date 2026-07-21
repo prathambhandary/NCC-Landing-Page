@@ -14,6 +14,7 @@ from flask_jwt_extended import JWTManager, unset_jwt_cookies
 from config import Config
 from auth import login
 from decorators import admin_required
+from github import update_json, get_json
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -53,15 +54,43 @@ def load_json(filename):
 def dashboard():
     return render_template("admin/dashboard.html")
 
+
 @app.route("/admin/login")
 def admin_login():
     return render_template("admin/login.html")
+
 
 @app.route("/api/logout", methods=["POST"])
 def logout():
     response = jsonify({"success": True})
     unset_jwt_cookies(response)
     return response
+
+
+@app.route("/admin/news")
+@admin_required
+def admin_news():
+    news = get_json("data/news.json")
+    return render_template("admin/news.html", news=news)
+
+
+@app.route("/admin/news/save", methods=["POST"])
+@admin_required
+def save_news():
+
+    news = request.json
+
+    update_json(
+        "data/news.json",
+        news,
+        "Updated news"
+    )
+
+    return jsonify({
+        "success": True
+    })
+
+
 
 # ---------------------------------------------------------------------------
 # Context injected into every template
