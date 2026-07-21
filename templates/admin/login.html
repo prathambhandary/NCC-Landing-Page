@@ -91,8 +91,8 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         },
         credentials: "same-origin",   // important
         body: JSON.stringify({
-            username,
-            password
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
         })
     });
 
