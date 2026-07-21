@@ -7,53 +7,61 @@ Run with:  python app.py
 """
 
 import json
+import os
 from pathlib import Path
 from flask import Flask, render_template, jsonify, request, send_from_directory
-import secrets
-import os
-
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD") if os.environ.get("ADMIN_PASSWORD") else "admin123"  # default password
-ADMIN_TOKENS = {}  # simple in-memory token store
-
+from flask_jwt_extended import JWTManager, unset_jwt_cookies
+from config import Config
+from auth import login
+from decorators import admin_required
 
 app = Flask(__name__)
+app.config.from_object(Config)
+
+jwt = JWTManager(app)
+
+app.add_url_rule(
+    "/api/login",
+    view_func=login,
+    methods=["POST"]
+)
 
 DATA_DIR = Path(__file__).parent / "data"
 
+from flask_jwt_extended import JWTManager
+
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
+
+app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
+app.config["JWT_ACCESS_COOKIE_NAME"] = "access_token"
+app.config["JWT_COOKIE_SECURE"] = False      # True when using HTTPS
+app.config["JWT_COOKIE_HTTPONLY"] = True
+app.config["JWT_COOKIE_SAMESITE"] = "Lax"
+
+jwt = JWTManager(app)
 
 def load_json(filename):
     with open(DATA_DIR / filename, encoding="utf-8") as f:
         return json.load(f)
 
-
 # ---------------------------------------------------------------------------
-# ADMIN LOGIN – minimal auth (no CRUD)
+# Admin
 # ---------------------------------------------------------------------------
 
-
-
-# Serve the admin HTML page (place admin.html in static/)
 @app.route("/admin")
-def admin_panel():
-    return send_from_directory("templates", "admin.html")
+@admin_required
+def dashboard():
+    return render_template("admin/dashboard.html")
 
-# Login endpoint
-@app.route("/api/admin/login", methods=["POST"])
+@app.route("/admin/login")
 def admin_login():
-    data = request.get_json()
-    if not data or data.get("password") != ADMIN_PASSWORD:
-        return jsonify({"success": False, "error": "Invalid password"}), 401
-    token = secrets.token_urlsafe(32)
-    ADMIN_TOKENS[token] = True
-    return jsonify({"success": True, "token": token})
+    return render_template("admin/login.html")
 
-# Verify token (used by the frontend on page load)
-@app.route("/api/admin/verify", methods=["GET"])
-def admin_verify():
-    token = request.headers.get("X-Admin-Token")
-    if token and token in ADMIN_TOKENS:
-        return jsonify({"valid": True})
-    return jsonify({"valid": False}), 401
+@app.route("/api/logout", methods=["POST"])
+def logout():
+    response = jsonify({"success": True})
+    unset_jwt_cookies(response)
+    return response
 
 # ---------------------------------------------------------------------------
 # Context injected into every template
@@ -108,9 +116,6 @@ def gallery():
     return render_template("gallery.html", years=years)
 
 
-# ---------------------------------------------------------------------------
-# JSON API used by the gallery page's calendar filter (static/js/gallery.js)
-# ---------------------------------------------------------------------------
 @app.route("/api/gallery")
 def api_gallery():
     gallery_data = load_json("gallery.json")
