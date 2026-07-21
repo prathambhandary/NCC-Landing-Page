@@ -1,42 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage News</title>
 
     <style>
-        body{
-            font-family:Arial;
-            margin:40px;
-            background:#f5f5f5;
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
-        .card{
-            background:white;
-            padding:20px;
-            margin-bottom:20px;
-            border-radius:10px;
-            box-shadow:0 2px 8px rgba(0,0,0,.1);
+        body {
+            margin: 40px;
+            background: #f5f5f5;
         }
 
-        input,textarea,select{
-            width:100%;
-            padding:10px;
-            margin:8px 0;
+        h1 {
+            margin-bottom: 25px;
         }
 
-        textarea{
-            height:120px;
-            resize:vertical;
+        .top {
+            margin-bottom: 25px;
         }
 
-        button{
-            padding:10px 20px;
-            cursor:pointer;
+        button {
+            padding: 10px 18px;
+            cursor: pointer;
+            margin-right: 10px;
         }
 
-        .top{
-            margin-bottom:25px;
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .display {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .delete-btn {
+            margin-top: 15px;
+            background: crimson;
+            color: white;
+            border: none;
         }
     </style>
 </head>
@@ -46,8 +76,8 @@
 <h1>News Manager</h1>
 
 <div class="top">
-    <button onclick="addNews()">Add News</button>
-    <button onclick="save()">Save Changes</button>
+    <button onclick="addNews()">➕ Add News</button>
+    <button onclick="save()">💾 Save Changes</button>
 </div>
 
 <div id="container">
@@ -57,25 +87,24 @@
 <div class="card">
 
 <label>Date</label>
-<input class="date" value="{{item.date}}">
+<input class="date" value="{{ item.date }}">
 
 <label>Title</label>
-<input class="title" value="{{item.title}}">
+<input class="title" value="{{ item.title }}">
 
 <label>Summary</label>
-<textarea class="summary">{{item.summary}}</textarea>
+<textarea class="summary">{{ item.summary }}</textarea>
 
 <label>Tag</label>
-<input class="tag" value="{{item.tag}}">
+<input class="tag" value="{{ item.tag }}">
 
 <label>
-<input type="checkbox"
-class="display"
-{% if item.display %}checked{% endif %}>
-Display
+    <input type="checkbox" class="display"
+    {% if item.display %}checked{% endif %}>
+    Display
 </label>
 
-<button onclick="this.parentElement.remove()">
+<button class="delete-btn" onclick="this.parentElement.remove()">
 Delete
 </button>
 
@@ -85,96 +114,105 @@ Delete
 
 </div>
 
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
 <script>
 
 function addNews(){
 
-const div=document.createElement("div");
+    const div=document.createElement("div");
 
-div.className="card";
+    div.className="card";
 
-div.innerHTML=`
+    div.innerHTML=`
+        <label>Date</label>
+        <input class="date">
 
-<label>Date</label>
-<input class="date">
+        <label>Title</label>
+        <input class="title">
 
-<label>Title</label>
-<input class="title">
+        <label>Summary</label>
+        <textarea class="summary"></textarea>
 
-<label>Summary</label>
-<textarea class="summary"></textarea>
+        <label>Tag</label>
+        <input class="tag">
 
-<label>Tag</label>
-<input class="tag">
+        <label>
+            <input type="checkbox" class="display" checked>
+            Display
+        </label>
 
-<label>
-<input class="display" type="checkbox" checked>
-Display
-</label>
+        <button class="delete-btn" onclick="this.parentElement.remove()">
+            Delete
+        </button>
+    `;
 
-<button onclick="this.parentElement.remove()">
-Delete
-</button>
-
-`;
-
-document.getElementById("container").appendChild(div);
-
+    document.getElementById("container").appendChild(div);
 }
 
 async function save(){
 
-const cards=document.querySelectorAll(".card");
+    const cards=document.querySelectorAll(".card");
 
-let news=[];
+    let news=[];
 
-cards.forEach(card=>{
+    cards.forEach(card=>{
 
-news.push({
+        news.push({
 
-date:card.querySelector(".date").value,
+            date:card.querySelector(".date").value.trim(),
 
-title:card.querySelector(".title").value,
+            title:card.querySelector(".title").value.trim(),
 
-summary:card.querySelector(".summary").value,
+            summary:card.querySelector(".summary").value.trim(),
 
-tag:card.querySelector(".tag").value,
+            tag:card.querySelector(".tag").value.trim(),
 
-display:card.querySelector(".display").checked
+            display:card.querySelector(".display").checked
 
-});
+        });
 
-});
+    });
 
-const r=await fetch("/admin/news/save",{
+    try{
 
-method:"POST",
+        const r = await api("/admin/news/save", {
 
-headers:{
-"Content-Type":"application/json"
-},
+            method:"POST",
 
-credentials:"same-origin",
+            headers:{
+                "Content-Type":"application/json"
+            },
 
-body:JSON.stringify(news)
+            body:JSON.stringify(news)
 
-});
+        });
 
-if(r.ok){
+        const text = await r.text();
 
-alert("Saved!");
+        console.log("Status:", r.status);
+        console.log("Response:", text);
 
-}
+        if(r.ok){
 
-else{
+            alert("✅ News updated successfully!");
 
-alert("Failed");
+        }else{
 
-}
+            alert(`❌ Failed (${r.status})\n\n${text}`);
+
+        }
+
+    }catch(err){
+
+        console.error(err);
+        alert("Request failed.");
+
+    }
 
 }
 
 </script>
 
 </body>
-</html>
+</html> 

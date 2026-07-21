@@ -32,11 +32,10 @@ DATA_DIR = Path(__file__).parent / "data"
 from flask_jwt_extended import JWTManager
 
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
-
 app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
-app.config["JWT_ACCESS_COOKIE_NAME"] = "access_token"
-app.config["JWT_COOKIE_SECURE"] = False      # True when using HTTPS
+app.config["JWT_COOKIE_CSRF_PROTECT"] = True
 app.config["JWT_COOKIE_HTTPONLY"] = True
+app.config["JWT_COOKIE_SECURE"] = False   # True on HTTPS
 app.config["JWT_COOKIE_SAMESITE"] = "Lax"
 
 jwt = JWTManager(app)
