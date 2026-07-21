@@ -12,12 +12,21 @@ from pathlib import Path
 from flask import Flask, render_template, jsonify, request, send_from_directory
 from flask_jwt_extended import JWTManager, unset_jwt_cookies
 from config import Config
-from auth import login
+from auth import login, verify, logout
 from decorators import admin_required
+import github
 from github import update_json, get_json
 
 app = Flask(__name__)
 app.config.from_object(Config)
+
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
+app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
+app.config["JWT_COOKIE_CSRF_PROTECT"] = True
+app.config["JWT_COOKIE_HTTPONLY"] = True
+app.config["JWT_CSRF_IN_COOKIES"] = True
+app.config["JWT_COOKIE_SECURE"] = False   # True on HTTPS
+app.config["JWT_COOKIE_SAMESITE"] = "Lax"
 
 jwt = JWTManager(app)
 
@@ -29,16 +38,6 @@ app.add_url_rule(
 
 DATA_DIR = Path(__file__).parent / "data"
 
-from flask_jwt_extended import JWTManager
-
-app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
-app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
-app.config["JWT_COOKIE_CSRF_PROTECT"] = True
-app.config["JWT_COOKIE_HTTPONLY"] = True
-app.config["JWT_COOKIE_SECURE"] = False   # True on HTTPS
-app.config["JWT_COOKIE_SAMESITE"] = "Lax"
-
-jwt = JWTManager(app)
 
 def load_json(filename):
     with open(DATA_DIR / filename, encoding="utf-8") as f:
@@ -48,30 +47,95 @@ def load_json(filename):
 # Admin
 # ---------------------------------------------------------------------------
 
-@app.route("/admin")
+# ----- Admin authentication endpoints -----
+@app.route('/api/admin/login', methods=['POST'])
+def admin_login():
+    return login()
+
+@app.route('/api/admin/verify', methods=['GET'])
+def admin_verify():
+    return verify()
+
+@app.route('/api/admin/logout', methods=['POST'])
+def admin_logout():
+    return logout()
+
+@app.route('/admin/login', methods=['GET'])
+def admin_login_page():
+    return render_template('admin/login.html')  
+
+# ----- Admin page routes (serve HTML) -----
+@app.route('/admin')
 @admin_required
 def dashboard():
-    return render_template("admin/dashboard.html")
+    return render_template('admin/dashboard.html', unit_name=Config.UNIT_NAME or "Manipal Jnanasudha NCC Naval Sub Unit")
 
-
-@app.route("/admin/login")
-def admin_login():
-    return render_template("admin/login.html")
-
-
-@app.route("/api/logout", methods=["POST"])
-def logout():
-    response = jsonify({"success": True})
-    unset_jwt_cookies(response)
-    return response
-
-
-@app.route("/admin/news")
+@app.route('/admin/news')
 @admin_required
 def admin_news():
-    news = get_json("data/news.json")
-    return render_template("admin/news.html", news=news)
+    news = github.get_json('data/news.json')
+    return render_template('admin/news.html', unit_name=Config.UNIT_NAME or "Manipal Jnanasudha NCC Naval Sub Unit", news=news)
 
+@app.route('/admin/gallery')
+@admin_required
+def admin_gallery():
+    gallery = github.get_json('data/gallery.json')
+    return render_template('admin/gallery.html', unit_name=Config.UNIT_NAME or "Manipal Jnanasudha NCC Naval Sub Unit", gallery=gallery)
+
+# ----- Data API endpoints (all must use @admin_required) -----
+@app.route('/api/admin/officers', methods=['GET'])
+@admin_required
+def get_officers():
+    data = github.get_json('data/officers.json')
+    return jsonify(data)
+
+@app.route('/api/admin/news', methods=['GET'])
+@admin_required
+def get_news():
+    data = github.get_json('data/news.json')
+    return jsonify(data)
+
+@app.route('/api/admin/achievers', methods=['GET'])
+@admin_required
+def get_achievers():
+    data = github.get_json('data/achievers.json')
+    return jsonify(data)
+
+@app.route('/api/admin/alumni', methods=['GET'])
+@admin_required
+def get_alumni():
+    data = github.get_json('data/alumni.json')
+    return jsonify(data)
+
+@app.route('/api/admin/gallery', methods=['GET'])
+@admin_required
+def get_gallery():
+    data = github.get_json('data/gallery.json')
+    return jsonify(data)
+
+@app.route('/api/admin/settings', methods=['GET'])
+@admin_required
+def get_settings():
+    # You may store settings in a separate JSON or use Config class
+    return jsonify({
+        "unit_name": Config.UNIT_NAME or "Manipal Jnanasudha NCC Naval Sub Unit",
+        "parent_unit": Config.PARENT_UNIT or "6 Kar Naval Unit NCC",
+        "directorate": Config.DIRECTORATE or "Karnataka & Goa Directorate, NCC",
+        "cadet_strength": Config.CADET_STRENGTH or 100
+    })
+
+# POST/PUT/DELETE endpoints also need @admin_required
+@app.route('/api/admin/officers', methods=['POST'])
+@admin_required
+def add_officer():
+    data = request.get_json()
+    item = data.get('item')
+    if not item:
+        return jsonify({"error": "Missing item"}), 400
+    officers = github.get_json('data/officers.json')
+    officers.append(item)
+    github.update_json('data/officers.json', officers, "Add officer")
+    return jsonify({"success": True})
 
 @app.route("/admin/news/save", methods=["POST"])
 @admin_required
@@ -88,7 +152,6 @@ def save_news():
     return jsonify({
         "success": True
     })
-
 
 
 # ---------------------------------------------------------------------------

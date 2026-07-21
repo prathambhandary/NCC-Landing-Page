@@ -1,18 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — {{ unit_name }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
 <body>
 
-<h1>Welcome to the Admin Dashboard</h1>
+<div class="signal-stripe" aria-hidden="true">
+  <span class="s-gold"></span><span class="s-red"></span><span class="s-navy"></span><span class="s-sky"></span>
+</div>
 
-<ul>
-    <li><a href="/admin/news">Manage News</a></li>
-    <li><a href="/admin/officers">Manage Officers</a></li>
-    <li><a href="/admin/gallery">Manage Gallery</a></li>
-    <li><a href="/admin/achievers">Manage Achievers</a></li>
-</ul>
+<header class="admin-header">
+  <div class="admin-header-inner">
+    <div class="admin-brand">
+      <div class="admin-brand-icon" aria-hidden="true">⚓</div>
+      <div class="admin-brand-text">
+        <div class="primary">Admin Dashboard</div>
+        <div class="secondary">{{ unit_name }}</div>
+      </div>
+    </div>
+    <div class="admin-header-actions">
+      <a href="{{ url_for('index') }}" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">View Live Site ↗</a>
+      <button class="btn btn-ghost btn-sm" data-logout>Log Out</button>
+    </div>
+  </div>
+</header>
 
+<main class="admin-main">
+  <div class="admin-page-title">
+    <div>
+      <h1>Welcome back</h1>
+      <p class="admin-sub">Pick what you'd like to update. Changes go live on the website as soon as you save.</p>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+    <a class="dash-card" href="{{ url_for('admin_news') }}">
+      <span class="dc-icon" aria-hidden="true">📰</span>
+      <h3>Manage News</h3>
+      <p>Add, edit or remove the announcements shown on the homepage — camps, enrollments, results and events.</p>
+      <span class="dc-go">Open News Manager →</span>
+    </a>
+
+    <a class="dash-card" href="{{ url_for('admin_gallery') }}">
+      <span class="dc-icon" aria-hidden="true">🖼️</span>
+      <h3>Manage Gallery</h3>
+      <p>Update photo albums — event details, descriptions and the images shown for each activity.</p>
+      <span class="dc-go">Open Gallery Manager →</span>
+    </a>
+  </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check authentication
+    checkAuth();
+
+    // Logout button
+    const logoutBtn = document.querySelector('[data-logout]');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logout);
+    }
+});
+</script>
 </body>
 </html>

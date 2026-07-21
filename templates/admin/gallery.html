@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Gallery — {{ unit_name }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+
+<div class="signal-stripe" aria-hidden="true">
+  <span class="s-gold"></span><span class="s-red"></span><span class="s-navy"></span><span class="s-sky"></span>
+</div>
+
+<header class="admin-header">
+  <div class="admin-header-inner">
+    <div class="admin-brand">
+      <div class="admin-brand-icon" aria-hidden="true">🖼️</div>
+      <div class="admin-brand-text">
+        <div class="primary">Gallery Manager</div>
+        <div class="secondary">{{ unit_name }}</div>
+      </div>
+    </div>
+    <div class="admin-header-actions">
+      <button class="btn btn-ghost btn-sm" data-logout>Log Out</button>
+    </div>
+  </div>
+</header>
+
+<main class="admin-main">
+  <div class="admin-page-title">
+    <div>
+      <h1>Gallery</h1>
+      <p class="admin-sub">Each card below is one event or activity. Before adding an image here, upload the photo file to the repository's <code>static/images/gallery/&lt;category&gt;/</code> folder, then paste that same file path into the image field.</p>
+    </div>
+    <a href="{{ url_for('dashboard') }}" class="back-link">← Back to Dashboard</a>
+  </div>
+
+  <div id="cardContainer"></div>
+
+  <div class="empty-state" id="emptyState" style="display:none;">
+    No gallery events yet. Tap "Add Event" below to create your first one.
+  </div>
+
+  <div class="save-bar">
+    <span class="unsaved-note" id="unsavedNote">You have unsaved changes</span>
+    <button class="btn btn-outline" id="addBtn" type="button">+ Add Event</button>
+    <button class="btn btn-primary" id="saveBtn" type="button">
+      <span id="saveBtnLabel">Save Changes</span>
+      <span class="spinner" id="saveSpinner" aria-hidden="true"></span>
+    </button>
+  </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+<script>
+const initialGallery = "{{ gallery | tojson }}";
+const container = document.getElementById("cardContainer");
+const emptyState = document.getElementById("emptyState");
+let dirty = false;
+
+function markDirty() {
+  dirty = true;
+  document.getElementById("unsavedNote").classList.add("show");
+}
+
+function nextId() {
+  let max = 0;
+  document.querySelectorAll(".entry-card").forEach((card) => {
+    const idVal = card.dataset.id || "";
+    const num = parseInt(idVal.replace(/[^0-9]/g, ""), 10);
+    if (!isNaN(num) && num > max) max = num;
+  });
+  return "g" + String(max + 1).padStart(4, "0");
+}
+
+function imageRowTemplate(image) {
+  const row = document.createElement("div");
+  row.className = "image-row";
+  row.innerHTML = `
+    <div class="field">
+      <label>Image File Path</label>
+      <input type="text" class="img-src" value="${image && image.src ? image.src : ""}" placeholder="static/images/gallery/ncc/g0010_01.jpg">
+    </div>
+    <div class="field">
+      <label>Caption (optional)</label>
+      <input type="text" class="img-note" value="${image && image.note ? image.note : ""}" placeholder="Optional short caption">
+    </div>
+    <button class="btn btn-danger btn-sm remove-img-btn" type="button" title="Remove this image">✕</button>
+  `;
+  row.querySelectorAll("input").forEach((el) => {
+    el.addEventListener("input", markDirty);
+  });
+  row.querySelector(".remove-img-btn").addEventListener("click", () => {
+    row.remove();
+    markDirty();
+  });
+  return row;
+}
+
+function cardTemplate(item, isNew) {
+  const wrap = document.createElement("div");
+  wrap.className = "entry-card" + (isNew ? " is-new" : "");
+  wrap.dataset.id = item.id || "";
+
+  wrap.innerHTML = `
+    <div class="entry-card-head">
+      <span class="pill">${isNew ? "New Event" : (item.id || "")}</span>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label>Event Date</label>
+        <input type="date" class="date" value="${item.date || ""}">
+      </div>
+      <div class="field">
+        <label>Category</label>
+        <select class="category">
+          <option value="ncc" ${item.category === "ncc" ? "selected" : ""}>NCC Activity</option>
+          <option value="community" ${item.category === "community" ? "selected" : ""}>Community Service</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Subcategory</label>
+        <input type="text" class="subcategory" value="${item.subcategory || ""}" placeholder="e.g. Field Visit, Training, Parade">
+      </div>
+    </div>
+    <div class="field" style="margin-top:14px;">
+      <label>Title</label>
+      <input type="text" class="title" value="${item.title || ""}" placeholder="Short event name">
+    </div>
+    <div class="field" style="margin-top:14px;">
+      <label>Description</label>
+      <textarea class="description" placeholder="A short paragraph describing the activity">${item.description || ""}</textarea>
+    </div>
+
+    <div class="field" style="margin-top:18px;">
+      <label>Photos</label>
+      <div class="image-list"></div>
+      <div style="margin-top:10px;">
+        <button class="btn btn-outline btn-sm add-img-btn" type="button">+ Add Photo</button>
+      </div>
+    </div>
+
+    <div class="entry-card-foot">
+      <button class="btn btn-danger btn-sm delete-btn" type="button">Delete Event</button>
+    </div>
+  `;
+
+  const imageList = wrap.querySelector(".image-list");
+  (item.images || []).forEach((img) => imageList.appendChild(imageRowTemplate(img)));
+
+  wrap.querySelector(".add-img-btn").addEventListener("click", () => {
+    imageList.appendChild(imageRowTemplate(null));
+    markDirty();
+  });
+
+  wrap.querySelectorAll("input, textarea, select").forEach((el) => {
+    el.addEventListener("input", markDirty);
+    el.addEventListener("change", markDirty);
+  });
+
+  const deleteBtn = wrap.querySelector(".delete-btn");
+  armConfirmDelete(deleteBtn, () => {
+    wrap.remove();
+    markDirty();
+    toggleEmptyState();
+  });
+
+  return wrap;
+}
+
+function toggleEmptyState() {
+  emptyState.style.display = container.children.length === 0 ? "block" : "none";
+}
+
+function render(items) {
+  container.innerHTML = "";
+  items.forEach((item) => container.appendChild(cardTemplate(item, false)));
+  toggleEmptyState();
+}
+
+document.getElementById("addBtn").addEventListener("click", () => {
+  const card = cardTemplate({ id: nextId(), date: "", category: "ncc", subcategory: "", title: "", description: "", images: [] }, true);
+  container.prepend(card);
+  toggleEmptyState();
+  markDirty();
+  card.querySelector(".date").focus();
+  card.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+document.getElementById("saveBtn").addEventListener("click", async () => {
+  const cards = container.querySelectorAll(".entry-card");
+  const gallery = [];
+  let hasError = false;
+
+  cards.forEach((card) => {
+    const images = [];
+    card.querySelectorAll(".image-row").forEach((row) => {
+      const src = row.querySelector(".img-src").value.trim();
+      const note = row.querySelector(".img-note").value.trim();
+      if (src) images.push({ src, note });
+    });
+
+    const date = card.querySelector(".date").value.trim();
+    const title = card.querySelector(".title").value.trim();
+
+    if (!date || !title) hasError = true;
+
+    gallery.push({
+      id: card.dataset.id || nextId(),
+      category: card.querySelector(".category").value,
+      subcategory: card.querySelector(".subcategory").value.trim(),
+      title,
+      date,
+      description: card.querySelector(".description").value.trim(),
+      images,
+    });
+  });
+
+  if (hasError) {
+    showToast("Every event needs at least a date and a title.", "error");
+    return;
+  }
+
+  const saveBtn = document.getElementById("saveBtn");
+  const saveBtnLabel = document.getElementById("saveBtnLabel");
+  const saveSpinner = document.getElementById("saveSpinner");
+
+  saveBtn.disabled = true;
+  saveSpinner.classList.add("show");
+  saveBtnLabel.textContent = "Saving...";
+
+  try {
+    const response = await api("/admin/gallery/save", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(gallery),
+    });
+
+    if (response.ok) {
+      dirty = false;
+      document.getElementById("unsavedNote").classList.remove("show");
+      showToast("Gallery updated successfully.");
+    } else {
+      const text = await response.text();
+      showToast(`Save failed (${response.status}). ${text}`, "error");
+    }
+  } catch (err) {
+    showToast("Couldn't reach the server. Please try again.", "error");
+  } finally {
+    saveBtn.disabled = false;
+    saveSpinner.classList.remove("show");
+    saveBtnLabel.textContent = "Save Changes";
+  }
+});
+
+window.addEventListener("beforeunload", (e) => {
+  if (dirty) {
+    e.preventDefault();
+    e.returnValue = "";
+  }
+});
+
+render(initialGallery);
+</script>
+
+</body>
+</html>

@@ -1,218 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage News</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        body {
-            margin: 40px;
-            background: #f5f5f5;
-        }
-
-        h1 {
-            margin-bottom: 25px;
-        }
-
-        .top {
-            margin-bottom: 25px;
-        }
-
-        button {
-            padding: 10px 18px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,.1);
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-top: 12px;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-        }
-
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .display {
-            width: auto;
-            margin-right: 8px;
-        }
-
-        .delete-btn {
-            margin-top: 15px;
-            background: crimson;
-            color: white;
-            border: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage News — {{ unit_name }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
-
 <body>
 
-<h1>News Manager</h1>
-
-<div class="top">
-    <button onclick="addNews()">➕ Add News</button>
-    <button onclick="save()">💾 Save Changes</button>
+<div class="signal-stripe" aria-hidden="true">
+  <span class="s-gold"></span><span class="s-red"></span><span class="s-navy"></span><span class="s-sky"></span>
 </div>
 
-<div id="container">
+<header class="admin-header">
+  <div class="admin-header-inner">
+    <div class="admin-brand">
+      <div class="admin-brand-icon" aria-hidden="true">📰</div>
+      <div class="admin-brand-text">
+        <div class="primary">News Manager</div>
+        <div class="secondary">{{ unit_name }}</div>
+      </div>
+    </div>
+    <div class="admin-header-actions">
+      <button class="btn btn-ghost btn-sm" data-logout>Log Out</button>
+    </div>
+  </div>
+</header>
 
-{% for item in news %}
+<main class="admin-main">
+  <div class="admin-page-title">
+    <div>
+      <h1>News</h1>
+      <p class="admin-sub">This is what cadets and parents see on the homepage. Newest date shows first automatically — you don't need to reorder anything.</p>
+    </div>
+    <a href="{{ url_for('dashboard') }}" class="back-link">← Back to Dashboard</a>
+  </div>
 
-<div class="card">
+  <div id="cardContainer" data-initial-news='{{ news | tojson | safe | replace("'", "&#39;") }}'></div>
 
-<label>Date</label>
-<input class="date" value="{{ item.date }}">
+  <div class="empty-state" id="emptyState" style="display:none;">
+    No news items yet. Tap "Add News" below to create your first one.
+  </div>
 
-<label>Title</label>
-<input class="title" value="{{ item.title }}">
+  <div class="save-bar">
+    <span class="unsaved-note" id="unsavedNote">You have unsaved changes</span>
+    <button class="btn btn-outline" id="addBtn" type="button">+ Add News</button>
+    <button class="btn btn-primary" id="saveBtn" type="button">
+      <span id="saveBtnLabel">Save Changes</span>
+      <span class="spinner" id="saveSpinner" aria-hidden="true"></span>
+    </button>
+  </div>
+</main>
 
-<label>Summary</label>
-<textarea class="summary">{{ item.summary }}</textarea>
-
-<label>Tag</label>
-<input class="tag" value="{{ item.tag }}">
-
-<label>
-    <input type="checkbox" class="display"
-    {% if item.display %}checked{% endif %}>
-    Display
-</label>
-
-<button class="delete-btn" onclick="this.parentElement.remove()">
-Delete
-</button>
-
-</div>
-
-{% endfor %}
-
-</div>
+<datalist id="tagOptions">
+  <option value="Camp">
+  <option value="Enrollment">
+  <option value="Event">
+  <option value="Achievement">
+  <option value="Notice">
+</datalist>
 
 <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
-
 <script>
+// Load initial data from server (the JSON is passed via the template via a data attribute)
 
-function addNews(){
+const container = document.getElementById("cardContainer");
+const initialNews = JSON.parse(container.dataset.initialNews || '[]');
+const emptyState = document.getElementById("emptyState");
+let dirty = false;
 
-    const div=document.createElement("div");
-
-    div.className="card";
-
-    div.innerHTML=`
-        <label>Date</label>
-        <input class="date">
-
-        <label>Title</label>
-        <input class="title">
-
-        <label>Summary</label>
-        <textarea class="summary"></textarea>
-
-        <label>Tag</label>
-        <input class="tag">
-
-        <label>
-            <input type="checkbox" class="display" checked>
-            Display
-        </label>
-
-        <button class="delete-btn" onclick="this.parentElement.remove()">
-            Delete
-        </button>
-    `;
-
-    document.getElementById("container").appendChild(div);
+// ----- Helper: Mark unsaved changes -----
+function markDirty() {
+  dirty = true;
+  document.getElementById("unsavedNote").classList.add("show");
 }
 
-async function save(){
+// ----- Helper: Confirm delete with double-click -----
+function armConfirmDelete(btn, onConfirm) {
+  let armed = false;
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (!armed) {
+      armed = true;
+      btn.classList.add('confirming');
+      btn.textContent = 'Confirm Delete';
+      setTimeout(() => {
+        armed = false;
+        btn.classList.remove('confirming');
+        btn.textContent = 'Delete';
+      }, 3000);
+      return;
+    }
+    // If armed, execute delete
+    onConfirm();
+    armed = false;
+    btn.classList.remove('confirming');
+    btn.textContent = 'Delete';
+  });
+}
 
-    const cards=document.querySelectorAll(".card");
+// ----- Toast notification -----
+function showToast(message, type) {
+  // Remove existing toast if any
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
 
-    let news=[];
+  const toast = document.createElement('div');
+  toast.className = 'toast' + (type === 'error' ? ' toast-error' : type === 'success' ? ' toast-success' : '');
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  // Trigger reflow for animation
+  void toast.offsetWidth;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, 3500);
+}
 
-    cards.forEach(card=>{
+// ----- Card template -----
+function cardTemplate(item, isNew) {
+  const wrap = document.createElement("div");
+  wrap.className = "entry-card" + (isNew ? " is-new" : "");
 
-        news.push({
+  wrap.innerHTML = `
+    <div class="entry-card-head">
+      <span class="pill">${isNew ? "New" : "News Item"}</span>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label>Date</label>
+        <input type="text" class="date" value="${item.date || ""}" placeholder="e.g. 2026-07-21 or a date range">
+      </div>
+      <div class="field">
+        <label>Tag</label>
+        <input type="text" class="tag" list="tagOptions" value="${item.tag || ""}" placeholder="e.g. Camp, Notice">
+      </div>
+    </div>
+    <div class="field" style="margin-top:14px;">
+      <label>Title</label>
+      <input type="text" class="title" value="${item.title || ""}" placeholder="Short, clear headline">
+    </div>
+    <div class="field" style="margin-top:14px;">
+      <label>Summary</label>
+      <textarea class="summary" placeholder="A couple of sentences describing what happened">${item.summary || ""}</textarea>
+    </div>
+    <div class="entry-card-foot" style="justify-content: space-between; align-items:center;">
+      <label class="toggle-field">
+        <input type="checkbox" class="display" ${item.display !== false ? "checked" : ""}>
+        <span class="toggle-track"></span>
+        <span class="toggle-label">Visible on website</span>
+      </label>
+      <button class="btn btn-danger btn-sm delete-btn" type="button">Delete</button>
+    </div>
+  `;
 
-            date:card.querySelector(".date").value.trim(),
+  wrap.querySelectorAll("input, textarea").forEach((el) => {
+    el.addEventListener("input", markDirty);
+    el.addEventListener("change", markDirty);
+  });
 
-            title:card.querySelector(".title").value.trim(),
+  const deleteBtn = wrap.querySelector(".delete-btn");
+  armConfirmDelete(deleteBtn, () => {
+    wrap.remove();
+    markDirty();
+    toggleEmptyState();
+  });
 
-            summary:card.querySelector(".summary").value.trim(),
+  return wrap;
+}
 
-            tag:card.querySelector(".tag").value.trim(),
+function toggleEmptyState() {
+  emptyState.style.display = container.children.length === 0 ? "block" : "none";
+}
 
-            display:card.querySelector(".display").checked
+function render(items) {
+  container.innerHTML = "";
+  items.forEach((item) => container.appendChild(cardTemplate(item, false)));
+  toggleEmptyState();
+}
 
-        });
+// ----- Add news button -----
+document.getElementById("addBtn").addEventListener("click", () => {
+  const card = cardTemplate({ date: "", title: "", summary: "", tag: "", display: true }, true);
+  container.prepend(card);
+  toggleEmptyState();
+  markDirty();
+  card.querySelector(".date").focus();
+  card.scrollIntoView({ behavior: "smooth", block: "center" });
+});
 
+// ----- Save button -----
+document.getElementById("saveBtn").addEventListener("click", async () => {
+  const cards = container.querySelectorAll(".entry-card");
+  const news = [];
+
+  cards.forEach((card) => {
+    news.push({
+      date: card.querySelector(".date").value.trim(),
+      title: card.querySelector(".title").value.trim(),
+      summary: card.querySelector(".summary").value.trim(),
+      tag: card.querySelector(".tag").value.trim(),
+      display: card.querySelector(".display").checked,
+    });
+  });
+
+  const saveBtn = document.getElementById("saveBtn");
+  const saveBtnLabel = document.getElementById("saveBtnLabel");
+  const saveSpinner = document.getElementById("saveSpinner");
+
+  saveBtn.disabled = true;
+  saveSpinner.classList.add("show");
+  saveBtnLabel.textContent = "Saving...";
+
+  try {
+    const response = await api("/admin/news/save", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(news),
     });
 
-    try{
-
-        const r = await api("/admin/news/save", {
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify(news)
-
-        });
-
-        const text = await r.text();
-
-        console.log("Status:", r.status);
-        console.log("Response:", text);
-
-        if(r.ok){
-
-            alert("✅ News updated successfully!");
-
-        }else{
-
-            alert(`❌ Failed (${r.status})\n\n${text}`);
-
-        }
-
-    }catch(err){
-
-        console.error(err);
-        alert("Request failed.");
-
+    // If unauthorized, redirect to login
+    if (response.status === 401) {
+      window.location.href = "/admin/login";
+      return;
     }
 
-}
+    if (response.ok) {
+      dirty = false;
+      document.getElementById("unsavedNote").classList.remove("show");
+      showToast("News updated successfully.", "success");
+    } else {
+      const text = await response.text();
+      showToast(`Save failed (${response.status}). ${text}`, "error");
+    }
+  } catch (err) {
+    showToast("Couldn't reach the server. Please try again.", "error");
+  } finally {
+    saveBtn.disabled = false;
+    saveSpinner.classList.remove("show");
+    saveBtnLabel.textContent = "Save Changes";
+  }
+});
 
+// ----- Warn before leaving with unsaved changes -----
+window.addEventListener("beforeunload", (e) => {
+  if (dirty) {
+    e.preventDefault();
+    e.returnValue = "";
+  }
+});
+
+// ----- Render initial data -----
+render(initialNews);
+
+// ----- Authentication check on load -----
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if the user is authenticated; redirect to login if not
+  fetch('/api/admin/verify')
+    .then(r => r.json())
+    .then(data => {
+      if (!data.valid) {
+        window.location.href = '/admin/login';
+      }
+    })
+    .catch(() => {
+      window.location.href = '/admin/login';
+    });
+
+  // Logout handler
+  const logoutBtn = document.querySelector('[data-logout]');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', function() {
+      if (confirm('Sign out of the admin panel?')) {
+        fetch('/api/admin/logout', { method: 'POST' })
+          .finally(() => {
+            window.location.href = '/admin/login';
+          });
+      }
+    });
+  }
+});
+
+// Also add a global error handler for fetch if needed (optional)
 </script>
 
 </body>
-</html> 
+</html>
