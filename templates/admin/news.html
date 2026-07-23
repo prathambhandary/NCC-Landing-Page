@@ -15,7 +15,7 @@
 <header class="admin-header">
   <div class="admin-header-inner">
     <div class="admin-brand">
-      <div class="admin-brand-icon" aria-hidden="true">📰</div>
+      <div class="admin-brand-icon" aria-hidden="true"><span class="crest-mini" aria-hidden="true"><img src="{{ url_for('static', filename='images/branding/ncclogo.png') }}" alt="NCC Logo"></span></div>
       <div class="admin-brand-text">
         <div class="primary">News Manager</div>
         <div class="secondary">{{ unit_name }}</div>
@@ -36,7 +36,7 @@
     <a href="{{ url_for('dashboard') }}" class="back-link">← Back to Dashboard</a>
   </div>
 
-  <div id="cardContainer" data-initial-news='{{ news | tojson | safe | replace("'", "&#39;") }}'></div>
+  <div id="cardContainer"></div>
 
   <div class="empty-state" id="emptyState" style="display:none;">
     No news items yet. Tap "Add News" below to create your first one.
@@ -62,10 +62,12 @@
 
 <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 <script>
-// Load initial data from server (the JSON is passed via the template via a data attribute)
+// Load initial data from server (the JSON is passed via the template)
+// ignore this error
+const initialNews = {{ news | tojson }};
+
 
 const container = document.getElementById("cardContainer");
-const initialNews = JSON.parse(container.dataset.initialNews || '[]');
 const emptyState = document.getElementById("emptyState");
 let dirty = false;
 
@@ -81,7 +83,7 @@ function armConfirmDelete(btn, onConfirm) {
   btn.addEventListener('click', function(e) {
     e.stopPropagation();
     if (!armed) {
-      armed = true;
+      armed = true; 
       btn.classList.add('confirming');
       btn.textContent = 'Confirm Delete';
       setTimeout(() => {

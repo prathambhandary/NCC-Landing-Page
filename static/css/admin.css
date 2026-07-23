@@ -359,6 +359,7 @@ input:focus, textarea:focus, select:focus {
   flex-direction: column;
   gap: 10px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-decoration: nones;
 }
 .dash-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
 .dash-card .dc-icon { font-size: 1.8rem; }
@@ -478,3 +479,5 @@ input:focus, textarea:focus, select:focus {
 }
 .spinner.show { display: inline-block; }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+a { text-decoration: none;}
