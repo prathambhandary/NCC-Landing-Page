@@ -72,8 +72,11 @@ def dashboard():
 
 @app.route('/admin/status')
 def is_admin_logged_in():
-    if verify().status_code == 200:
-        return jsonify({"logged_in": True}), 200
+    try:
+        if verify().status_code == 200:
+            return jsonify({"logged_in": True}), 200
+    except Exception:
+        pass
     
     return jsonify({"logged_in": False}), 401
 
