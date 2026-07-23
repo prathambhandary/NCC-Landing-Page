@@ -4,13 +4,13 @@
         "title": "CATC 2026 at NITK Surathkal",
         "summary": "Cadets of Manipal Jnanasudha from the 6 Kar Naval Unit joined approximately 555 NCC cadets at the NITK Surathkal campus for the official commencement of the 10 day Combined Annual Training Camp (CATC MLORE-11), uniting nine different wings and battalions under the NCC Group Headquarters, Mangaluru. The 10-day camp successfully concluded following intensive training in drills, weapon handling and a specialized cyber safety module by NITK Staff. The collaborative training provided 6 Kar Naval Unit cadets with critical physical fitness and safety skills alongside multiple wings from the Mangaluru Group.",
         "tag": "Camp",
-        "display": true
+        "display": false
     },
     {
         "date": "2026-07-11",
         "title": "Selection of New Batch of Cadets (Class of 2028)",
         "summary": "Enrollment for the incoming training cycle successfully concluded with 50 cadets selected. The new batch establishes a balanced cohort comprising 26 Senior Division (SD) and 24 Senior Wing (SW) cadets ready to embark on their training path.",
         "tag": "Enrollment",
-        "display": true
+        "display": false
     }
 ]
