@@ -1,24 +1,24 @@
 [
   {
-  "id": "g0001",
-  "category": "community",
-  "subcategory": "Drug Awareness",
-  "title": "Anti-Drug Awareness Drive",
-  "date": "2026-06-07",
-  "description": "Cadets of Manipal Jnanasudha participated in an Anti-Drug Awareness Drive accompanied by the Executive Officer of 6 Karnataka Naval Unit NCC, Lt Cdr M. A. Multani, to promote awareness about the harmful effects of drug abuse and encourage a drug-free society.",
-  "images": [
-    { "src": "static/images/gallery/community/g0001_01.jpg", "note": "" },
-    { "src": "static/images/gallery/community/g0001_02.jpg", "note": "" },
-    { "src": "static/images/gallery/community/g0001_03.jpg", "note": "" },
-    { "src": "static/images/gallery/community/g0001_04.jpg", "note": "" }
-  ]
-},  
+    "id": "g0001",
+    "category": "community",
+    "subcategory": "Drug Awareness",
+    "title": "Anti-Drug Awareness Drive",
+    "date": "07-06-2026",
+    "description": "Cadets of Manipal Jnanasudha participated in an Anti-Drug Awareness Drive accompanied by the Executive Officer of 6 Karnataka Naval Unit NCC, Lt Cdr M. A. Multani, to promote awareness about the harmful effects of drug abuse and encourage a drug-free society.",
+    "images": [
+      { "src": "static/images/gallery/community/g0001_01.jpg", "note": "" },
+      { "src": "static/images/gallery/community/g0001_02.jpg", "note": "" },
+      { "src": "static/images/gallery/community/g0001_03.jpg", "note": "" },
+      { "src": "static/images/gallery/community/g0001_04.jpg", "note": "" }
+    ]
+  },
   {
     "id": "g0002",
     "category": "ncc",
     "title": "Visit to Kota Shivaram Karanth Theme Park",
-    "subcategory": "8Field Visit",
-    "date": "2026-06-12",
+    "subcategory": "Field Visit",
+    "date": "12-06-2026",
     "description": "As part of an educational field visit, NCC cadets of Manipal Jnanasudha visited the Kota Shivaram Karanth Theme Park to gain insights into the life and contributions of the renowned Jnanpith awardee, Dr. Kota Shivaram Karanth. The visit provided cadets with an opportunity to explore the park's cultural exhibits, sculptures, art gallery, library, and auditorium, fostering an appreciation for Karnataka's rich literary and cultural heritage. The activity also encouraged teamwork, discipline, observation, and learning beyond the classroom, reflecting the NCC's objective of developing well-informed and socially responsible citizens.",
     "images": [
       { "src": "static/images/gallery/ncc/g0002_01.jpg", "note": "" },
@@ -31,7 +31,7 @@
     "category": "ncc",
     "title": "Visit to the MiG-29 Fighter Jet Monument",
     "subcategory": "Field Visit",
-    "date": "2026-06-13",
+    "date": "13-06-2026",
     "description": "As part of the educational field visit, NCC cadets of Manipal Jnanasudha visited the MiG-29 Fighter Jet Monument to learn about the Indian Air Force's contribution to safeguarding the nation. The visit introduced cadets to the significance of the MiG-29 as a frontline fighter aircraft and highlighted the dedication, courage, and professionalism of the armed forces. The experience inspired cadets to develop a deeper sense of patriotism, discipline, and respect for the nation's defence services while reinforcing the core values and objectives of the National Cadet Corps.",
     "images": [
       { "src": "static/images/gallery/ncc/g0003_01.jpg", "note": "" },
@@ -43,7 +43,7 @@
     "category": "ncc",
     "title": "Firing Practice",
     "subcategory": "Training",
-    "date": "2026-03-25",
+    "date": "25-03-2026",
     "description": "As part of the selection process for the Nau Sainik Camp (NSC), NCC cadets of Manipal Jnanasudha were given an opportunity to undergo firing practice at the MIT Firing Range. The training session helped cadets develop marksmanship skills, improve concentration, and enhance firearm handling under the supervision of qualified instructors. The activity also reinforced the values of discipline, precision, and responsibility, which are integral to NCC training.",
     "images": [
       { "src": "static/images/gallery/ncc/g0004_01.jpg", "note": "" },
@@ -56,7 +56,7 @@
     "category": "ncc",
     "title": "Republic Day Celebration",
     "subcategory": "Parade",
-    "date": "2026-01-26",
+    "date": "26-01-2026",
     "description": "NCC cadets of Manipal Jnanasudha proudly participated in the Republic Day celebrations by taking part in the ceremonial parade and paying tribute to the nation's democratic values and constitutional ideals. The event showcased the cadets' discipline, precision, and teamwork while fostering a strong sense of patriotism and national pride. The celebration also served as an opportunity for cadets to reaffirm their commitment to the ideals of unity, service, and responsible citizenship upheld by the National Cadet Corps.",
     "images": [
       { "src": "static/images/gallery/ncc/g0005_01.jpg", "note": "" },
@@ -69,20 +69,20 @@
     "category": "ncc",
     "title": "Boat Pulling Competition",
     "subcategory": "Seamanship",
-    "date": "2026-02-27",
+    "date": "27-02-2026",
     "description": "NCC cadets of Manipal Jnanasudha participated in the Boat Pulling activity conducted by 6 Karnataka Naval Unit NCC, Udupi, as part of their seamanship training. The event provided hands-on experience in naval traditions and tested the cadets' teamwork, coordination, physical endurance, and leadership skills. Working together to manoeuvre the boat efficiently, the cadets demonstrated discipline, determination, and effective communication, while gaining practical exposure to an important aspect of naval training.",
     "images": [
       { "src": "static/images/gallery/ncc/g0006_01.jpg", "note": "" },
       { "src": "static/images/gallery/ncc/g0006_02.jpg", "note": "" },
       { "src": "static/images/gallery/ncc/g0006_03.jpg", "note": "" }
     ]
-  }, 
+  },
   {
     "id": "g0007",
     "category": "ncc",
     "title": "Indian Navy Day Celebration",
     "subcategory": "Naval Awareness Activity",
-    "date": "2025-12-04",
+    "date": "04-12-2025",
     "description": "NCC cadets of Manipal Jnanasudha celebrated Indian Navy Day by commemorating the achievements, dedication, and service of the Indian Navy. The activity provided cadets with an opportunity to understand the significance of naval operations, the history of the Indian Navy, and its vital role in safeguarding the nation's maritime interests. The celebration inspired cadets to develop greater respect for the armed forces while strengthening the values of patriotism, discipline, and commitment to service.",
     "images": [
       { "src": "static/images/gallery/ncc/g0007_01.jpg", "note": "" },
@@ -92,10 +92,10 @@
   },
   {
     "id": "g0008",
-    "category": "community",  
+    "category": "community",
     "title": "Community Awareness Marathon",
     "subcategory": "Fitness & Social Outreach",
-    "date": "2026-02-26",
+    "date": "26-02-2026",
     "description": "NCC cadets of Manipal Jnanasudha organised a 12 km marathon from Udyavara to the Manipal Jnanasudha PU College Campus as part of their community engagement initiative. The event promoted fitness, discipline, and a healthy lifestyle while creating awareness about the importance of physical well-being among participants and the community. Through this initiative, cadets demonstrated leadership, organisational skills, and their commitment to social responsibility.",
     "images": [
       { "src": "static/images/gallery/ncc/g0008_01.jpg", "note": "" },
@@ -104,21 +104,15 @@
   },
   {
     "id": "g0009",
-    "category": "ncc",  
+    "category": "ncc",
     "title": "Visit to INS Kadamba and aircraft carrier INS Vikramaditya",
     "subcategory": "Ship Visit",
-    "date": "2026-02-28",
+    "date": "28-02-2026",
     "description": "Under the aegis of the 6 Kar Naval Unit, five selected cadets from the Manipal Jnanasudha Naval Sub-Unit were granted an exclusive opportunity to visit the INS Kadamba Naval Base in Karwar and the flagship aircraft carrier INS Vikramaditya. The study tour allowed cadets to explore advanced naval technology, modern weapon systems and experience the realities of life at sea firsthand.",
-    "images": [   
-      { 
-        "src": "static/images/gallery/ncc/g0009_01.jpg"
-      },
-      { 
-        "src": "static/images/gallery/ncc/g0009_02.jpg"
-      },
-      { 
-        "src": "static/images/gallery/ncc/g0009_03.jpg" 
-      }
+    "images": [
+      { "src": "static/images/gallery/ncc/g0009_01.jpg" },
+      { "src": "static/images/gallery/ncc/g0009_02.jpg" },
+      { "src": "static/images/gallery/ncc/g0009_03.jpg" }
     ]
   }
 ]

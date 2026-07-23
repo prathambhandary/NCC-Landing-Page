@@ -18,13 +18,24 @@ document.addEventListener('DOMContentLoaded', function () {
     month: 'all'
   };
 
-  function formatDate(iso) {
-    if (!iso) return '';
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
 
-    var parts = iso.split('-');
-    var y = parts[0];
-    var m = parseInt(parts[1], 10);
-    var d = parseInt(parts[2], 10);
+    var parts = dateStr.split('-');
+    var d, m, y;
+
+    // Detect format based on string length of first component
+    if (parts[0].length === 4) {
+      // ISO Format: YYYY-MM-DD
+      y = parts[0];
+      m = parseInt(parts[1], 10);
+      d = parseInt(parts[2], 10);
+    } else {
+      // European Format: DD-MM-YYYY
+      d = parseInt(parts[0], 10);
+      m = parseInt(parts[1], 10);
+      y = parts[2];
+    }
 
     return d + ' ' + MONTH_NAMES[m].slice(0, 3).toUpperCase() + ' ' + y;
   }
