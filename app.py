@@ -184,7 +184,12 @@ def inject_globals():
 @app.route("/")
 def index():
     officers = load_json("officers.json")
-    news = load_json("news.json")
+    all_news = load_json("news.json")
+    news = []
+    for n in all_news:
+        if n['display']:
+            news.append(n)
+    print(news)
     news_sorted = sorted(news, key=lambda n: n["date"], reverse=True)
     return render_template("index.html", officers=officers, news=news_sorted)
 
