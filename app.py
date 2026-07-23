@@ -70,6 +70,14 @@ def admin_login_page():
 def dashboard():
     return render_template('admin/dashboard.html', unit_name=Config.UNIT_NAME or "Manipal Jnanasudha NCC Naval Sub Unit")
 
+@app.route('/admin/status')
+def is_admin_logged_in():
+    if verify().status_code == 200:
+        return jsonify({"logged_in": True}), 200
+    
+    return jsonify({"logged_in": False}), 401
+
+
 @app.route('/admin/news')
 @admin_required
 def admin_news():
